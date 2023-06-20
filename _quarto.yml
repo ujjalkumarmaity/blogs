@@ -27,10 +27,6 @@ website:
         contents:
           - index.qmd
           - 2022-12-28-Mean-Median-Imputation.qmd
-          - ml/2021-12-28-logistic-regression-from-scratch.ipnyb
-      - section: "Layout"
-        contents:
-          - 2022-12-28-Mean-Median-Imputation.ipnyb
 
   page-footer: 
     left: "Copyright 2021, ujjal" 
