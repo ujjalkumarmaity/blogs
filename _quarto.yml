@@ -26,7 +26,6 @@ website:
       - section: "Basics"
         contents:
           - index.qmd
-          - 2022-12-28-Mean-Median-Imputation.qmd
 
   page-footer: 
     left: "Copyright 2021, ujjal" 
