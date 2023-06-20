@@ -1,23 +1,36 @@
 project:
   type: website
 
+# website:
+#   back-to-top-navigation: true
+#   title: "blogs"
+#   # navbar:
+#   #   left:
+#   #     - href: index.qmd
+#   #       text: Home
+#   #     - about.qmd
+#   sidebar:
+#     style : "docked"
+#     search : true
+#     contents :
+#       - section: "sastai"
+#         contents:
+#           - herf: ml/2021-12-28-logistic-regression-from-scratch.ipnyb
+#           - herf: ml/2022-12-28-Mean-Median-Imputation.ipnyb
+#       - section: "fastai"
 website:
-  back-to-top-navigation: true
-  title: "blogs"
-  # navbar:
-  #   left:
-  #     - href: index.qmd
-  #       text: Home
-  #     - about.qmd
   sidebar:
-    style : "docked"
-    search : true
-    contents :
-      - section: "sastai"
+    style: "docked"
+    search: true
+    contents:
+      - section: "Basics"
         contents:
-          - herf: ml/2021-12-28-logistic-regression-from-scratch.ipnyb
-          - herf: ml/2022-12-28-Mean-Median-Imputation.ipnyb
-      - section: "fastai"
+          - index.qmd
+          - 2022-12-28-Mean-Median-Imputation.qmd
+          - ml/2021-12-28-logistic-regression-from-scratch.ipnyb
+      - section: "Layout"
+        contents:
+          - 2022-12-28-Mean-Median-Imputation.ipnyb
 
   page-footer: 
     left: "Copyright 2021, ujjal" 
