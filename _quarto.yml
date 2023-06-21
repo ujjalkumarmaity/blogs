@@ -19,6 +19,16 @@ project:
 #           - herf: ml/2022-12-28-Mean-Median-Imputation.ipnyb
 #       - section: "fastai"
 website:
+  title: "ujjal"
+  navbar:
+    background: primary
+    search: true
+    right:
+      - text: "Home"
+        file: index.qmd
+      - text: "About Me"
+        file: about.qmd
+
   sidebar:
     style: "docked"
     search: true
@@ -33,7 +43,9 @@ website:
     left: "Copyright 2021, ujjal" 
     right: 
       - icon: github
-        href: https://github.com/
+        href: https://github.com/ujjalkumarmaity/
+      - icon: linkedin
+        href: https://www.linkedin.com/in/ujjalkumar/
       - icon: twitter 
         href: https://twitter.com/ 
 

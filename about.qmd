@@ -1,5 +1,21 @@
 ---
-title: "About"
+title: "About Me"
+# image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/ujjalkumarmaity/
+
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/ujjalkumar/     
+    # (additional links excluded for brevity)
 ---
 
-About this site
+## UJJAL KUMAR MAITY
+
+
+
+
