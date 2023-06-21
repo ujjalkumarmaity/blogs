@@ -28,7 +28,7 @@ website:
           - index.qmd
       - section: "Advance"
         contents:
-          - index.qmd
+          - about1.qmd
   page-footer: 
     left: "Copyright 2021, ujjal" 
     right: 
