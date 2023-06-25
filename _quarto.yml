@@ -32,13 +32,27 @@ website:
   sidebar:
     style: "docked"
     search: true
+    collapse-level: 1
     contents:
-      - section: "Basics"
+      - section: "Research-Paper-Implementation"
         contents:
           - index.qmd
-      - section: "Advance"
+      - section: "ML"
         contents:
-          - about1.qmd
+          - index.qmd     
+      - section: "NLP"
+        contents:
+          - index.qmd                       
+      - section: "Python"
+        contents:
+          - python/python_advance.qmd
+      # - section: "SQL"
+      #   contents:
+      #     - python/about1.qmd
+      # - section: "MongoSB"
+      #   contents:
+      #     - python/about1.qmd
+
   page-footer: 
     left: "Copyright 2021, ujjal" 
     right: 

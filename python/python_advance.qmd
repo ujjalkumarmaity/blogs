@@ -1,0 +1,244 @@
+---
+title: "Python Advance"
+description: "Post description"
+author: "ujjal"
+date: "25/25/2023"
+categories:
+  - python
+  - code
+---
+
+#### Lambda
+Lambda is a keyword in Python used to define functions, more specifically Anonymous Functions<br>
+`lambda arguments: expression`
+
+
+```python
+sum_fun = lambda a,b : a+b
+sum_fun(2,3)
+```
+
+
+
+
+    5
+
+
+
+#### Map
+- A function that applies a given function to each item of an iterable and returns an iterator.
+- It provides a faster way to transform an iterable based on the given condition.<br>
+`map(function, iterable)`
+
+
+```python
+sq = lambda x:x**2
+list(map(sq,[1,2,3,4]))
+```
+
+
+
+
+    [1, 4, 9, 16]
+
+
+
+#### Filter
+- It helps in extracting items from an iterable based on the given condition.<br>
+`filter(function, iterable)`
+
+
+```python
+def is_even(num):
+    return num % 2 == 0
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list(filter(is_even, numbers))
+```
+
+
+
+
+    [2, 4, 6, 8, 10]
+
+
+
+#### Reduce
+- It applies a function cumulatively/successively on each item of an iterable and returns a single value<br>
+`reduce(function, iterable, [, initializer])`
+
+
+```python
+from functools import reduce
+sum_fun = lambda x,y:x+y
+reduce(sum_fun,[1,2,3,5])
+```
+
+
+
+
+    11
+
+
+
+#### Generator
+Generators are a type of iterable, similar to lists or tuples, but with a key difference. Instead of storing all the values in memory at once, generators generate values on-the-fly as they are needed.
+
+This makes them memory-efficient and allows them to handle large data sets or infinite sequences.
+
+The `yield` statement pauses the function and returns the current value, and the function's state is saved
+
+
+```python
+def num_generator(n):
+    for i in range(n):
+        yield i
+num = num_generator(5)
+print(num)
+
+# Iterating over the generator
+for i in num:
+    print(i)
+```
+
+    <generator object num_generator at 0x000001BDBF0E3990>
+    0
+    1
+    2
+    3
+    4
+    
+
+#### Decorator
+Decorator is a design pattern that allows you to modify or extend the behavior of a function or class without directly modifying its source code.
+
+Decorators are implemented using the "@" symbol followed by the decorator function or class name, which is then placed directly before the function or class definition.
+
+
+```python
+def main_fun(func,a=10):
+    print("start main function")
+    func()
+    print("end main function")
+    return 1
+
+@main_fun
+def fun():
+    print("start decorator fun")
+    
+fun
+```
+
+    start main function
+    start decorator fun
+    end main function
+    
+
+
+
+
+    1
+
+
+
+# Class
+
+#### init function
+- In Python, `__init__() `is a special method (also known as a constructor) that is automatically called when you create an object of a class. It is used to initialize the attributes of the object.
+
+- Inside the __init__() method, you can define statements that initialize the attributes of the object
+
+## Inheritance
+
+Inheritance allows us to define a class that inherits all the methods and properties from another class.
+
+**Parent class** is the class being inherited from, also called base class.
+
+**Child class** is the class that inherits from another class, also called derived class.
+
+When you add the `__init__()` function, the child class will no longer inherit the parent's `__init__()` function.
+
+```python
+class Student(Person):
+  def __init__(self, fname, lname):
+```
+
+To keep the inheritance of the parent's `__init__()` function, add a call to the parent's `__init__()` function:
+
+```python
+class Student(Person):
+  def __init__(self, fname, lname):
+    Person.__init__(self, fname, lname)
+```
+
+`super()` function that will make the child class inherit all the methods and properties from its parent
+
+```python
+class Student(Person):
+  def __init__(self, fname, lname):
+    super().__init__(fname, lname)
+```
+
+
+```python
+class Person:
+    def __init__(self, fname, lname):
+        self.firstname = fname
+        self.lastname = lname
+
+    def printname(self):
+        print(self.firstname, self.lastname)
+
+class Student(Person):
+    def __init__(self, fname, lname, year):
+        super().__init__(fname, lname)
+        self.graduationyear = year
+
+    def printstd(self):
+        print("Welcome", self.firstname, self.lastname, "to the class of", self.graduationyear)
+
+x = Student("Mike", "Olsen", 2023)
+x.printstd()
+```
+
+    Welcome Mike Olsen to the class of 2023
+    
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+# RegEx
+
+1. \d: Matches any digit (0-9).
+2. \D: Matches any non-digit character.
+3. \w: Matches any alphanumeric character (a-z, A-Z, 0-9, and underscore _).
+4. \W: Matches any non-alphanumeric character.
+5. \s: Matches any whitespace character (space, tab, newline).
+6. \S: Matches any non-whitespace character.
+7. .: Matches any character except a newline.
+8. ^: Matches the start of a string.
+9. $: Matches the end of a string.
+10. []: Matches any character inside the brackets. For example, [aeiou] matches any vowel.
+11. [^]: Matches any character not inside the brackets. For example, [^aeiou] matches any consonant.
+12. *: Matches zero or more occurrences of the previous pattern.
+13. +: Matches one or more occurrences of the previous pattern.
+14. ?: Matches zero or one occurrence of the previous pattern.
+15. {n}: Matches exactly n occurrences of the previous pattern.
+16. {n,}: Matches n or more occurrences of the previous pattern.
+17. {n,m}: Matches between n and m occurrences of the previous pattern.
+18. |: Matches either the pattern on the left or the pattern on the right.
+19. (): Groups patterns together.
+20. (?i): Performs a case-insensitive match.
+21. (?m): Enables multiline matching.
+
+
+```python
+
+```
