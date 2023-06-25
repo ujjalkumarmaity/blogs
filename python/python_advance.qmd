@@ -2,7 +2,7 @@
 title: "Python Advance"
 description: "Post description"
 author: "ujjal"
-date: "25/25/2023"
+date: "01/25/2023"
 categories:
   - python
   - code

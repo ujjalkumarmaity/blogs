@@ -1,0 +1,921 @@
+---
+title: "Spacy"
+description: "Into to spacy"
+author: "ujjal"
+date: "6/25/2023"
+categories:
+  - spacy
+  - nlp
+---
+
+## Spacy
+
+spacy is open source  library for NLP in python.
+
+Some Feature
+
+- `Tokenization` : split text into words, pancutation mark etc.
+- `Part-of-Speech Tagging` : assign grammertical label to each token.
+- `Named Entity Recognition (NER)` - spacy can identify named entity in text. such as people name, ORG name
+- `Dependency Parsing` - Dependency parsing is the process of extracting the dependency parse of a sentence to represent its grammatical structure. 
+- `Lemmatization` - transform word into root word is called a lemma
+- `Sentence Boundary Detection(SBD)` - finding and segmenting individual sentence
+- `Entity Linking (EL)` - 
+- `Similarity` - Comparing word, text span and document and how they similar to each other
+- `Eule-based matching1` - 
+- `Training` -
+
+
+```python
+import spacy
+```
+
+
+```python
+nlp = spacy.load("en_core_web_sm")
+```
+
+## Tokenization
+
+
+```python
+text = "spaCy is an open-source software library for advanced natural language processing"
+for i in nlp(text):
+    print(i.text)
+```
+
+    spaCy
+    is
+    an
+    open
+    -
+    source
+    software
+    library
+    for
+    advanced
+    natural
+    language
+    processing
+    
+
+## Part-of-Speech Tagging
+assign grammertical label to each token.
+
+https://universaldependencies.org/u/pos/
+
+`tag_` represents the detailed part-of-speech tag assigned to the token, which includes more specific information about the word's grammatical properties. EX - "NN" for a noun or "VB" for a verb.
+
+`pos_` it provides more general categorization of the word part of speech. ex - NOUN 
+
+
+```python
+import pandas as pd
+text = "spaCy is an open-source software library for advanced natural language processing"
+l =[]
+for token in nlp(text):
+    l.append([token.text,token.pos_,token.tag_,spacy.explain(token.tag_),token.dep_, token.shape_, token.is_alpha])
+    #print(token.text,'->',token.pos_,'->',token.tag_,spacy.explain(token.tag_),token.dep_, token.shape_, token.is_alpha)
+pd.DataFrame(l,columns = ['tect','pos_','tag_','explain_tag','dep_','shape_','is_alpha'])    
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tect</th>
+      <th>pos_</th>
+      <th>tag_</th>
+      <th>explain_tag</th>
+      <th>dep_</th>
+      <th>shape_</th>
+      <th>is_alpha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>spaCy</td>
+      <td>INTJ</td>
+      <td>UH</td>
+      <td>interjection</td>
+      <td>nsubj</td>
+      <td>xxxXx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>is</td>
+      <td>AUX</td>
+      <td>VBZ</td>
+      <td>verb, 3rd person singular present</td>
+      <td>ROOT</td>
+      <td>xx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>an</td>
+      <td>DET</td>
+      <td>DT</td>
+      <td>determiner</td>
+      <td>det</td>
+      <td>xx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>open</td>
+      <td>ADJ</td>
+      <td>JJ</td>
+      <td>adjective (English), other noun-modifier (Chin...</td>
+      <td>amod</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-</td>
+      <td>PUNCT</td>
+      <td>HYPH</td>
+      <td>punctuation mark, hyphen</td>
+      <td>punct</td>
+      <td>-</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>source</td>
+      <td>NOUN</td>
+      <td>NN</td>
+      <td>noun, singular or mass</td>
+      <td>compound</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>software</td>
+      <td>NOUN</td>
+      <td>NN</td>
+      <td>noun, singular or mass</td>
+      <td>compound</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>library</td>
+      <td>NOUN</td>
+      <td>NN</td>
+      <td>noun, singular or mass</td>
+      <td>attr</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>for</td>
+      <td>ADP</td>
+      <td>IN</td>
+      <td>conjunction, subordinating or preposition</td>
+      <td>prep</td>
+      <td>xxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>advanced</td>
+      <td>ADJ</td>
+      <td>JJ</td>
+      <td>adjective (English), other noun-modifier (Chin...</td>
+      <td>amod</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>natural</td>
+      <td>ADJ</td>
+      <td>JJ</td>
+      <td>adjective (English), other noun-modifier (Chin...</td>
+      <td>amod</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>language</td>
+      <td>NOUN</td>
+      <td>NN</td>
+      <td>noun, singular or mass</td>
+      <td>compound</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>processing</td>
+      <td>NOUN</td>
+      <td>NN</td>
+      <td>noun, singular or mass</td>
+      <td>pobj</td>
+      <td>xxxx</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Dependency Parsing
+
+It analyzes the syntactic structure of a sentence and assigns grammatical relationships between words, creating a parse tree representation
+
+
+```python
+from spacy import displacy
+```
+
+
+```python
+text = "spaCy is an open-source software library for advanced natural language processing"
+doc = nlp(text)
+options = {"compact":True, "distance":100, "bg":"#0095b6", "color":"#DDDDDD", "font":"Source Sans Pro"}
+displacy.render(doc, style='dep', jupyter=True,)
+```
+
+
+<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="e8499767c94b4b49a9384825cade0386-0" class="displacy" width="2150" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">spaCy</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">INTJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">is</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">an</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">open-</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">source</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">software</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">library</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">for</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">advanced</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">natural</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1800">language</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1975">processing</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1975">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-0" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-1" stroke-width="2px" d="M420,352.0 C420,89.5 1095.0,89.5 1095.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,354.0 L412,342.0 428,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-2" stroke-width="2px" d="M595,352.0 C595,264.5 735.0,264.5 735.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-3" stroke-width="2px" d="M770,352.0 C770,177.0 1090.0,177.0 1090.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,354.0 L762,342.0 778,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-4" stroke-width="2px" d="M945,352.0 C945,264.5 1085.0,264.5 1085.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M945,354.0 L937,342.0 953,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-5" stroke-width="2px" d="M245,352.0 C245,2.0 1100.0,2.0 1100.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">attr</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1100.0,354.0 L1108.0,342.0 1092.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-6" stroke-width="2px" d="M1120,352.0 C1120,264.5 1260.0,264.5 1260.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1260.0,354.0 L1268.0,342.0 1252.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-7" stroke-width="2px" d="M1470,352.0 C1470,177.0 1965.0,177.0 1965.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1470,354.0 L1462,342.0 1478,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-8" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1645,354.0 L1637,342.0 1653,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-9" stroke-width="2px" d="M1820,352.0 C1820,264.5 1960.0,264.5 1960.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1820,354.0 L1812,342.0 1828,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-10" stroke-width="2px" d="M1295,352.0 C1295,89.5 1970.0,89.5 1970.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-10" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1970.0,354.0 L1978.0,342.0 1962.0,342.0" fill="currentColor"/>
+</g>
+</svg></span>
+
+
+## Sentence Boundary Detection(SBD)
+finding start and end of the sentence
+
+
+```python
+sent = "Processing raw text intelligently is difficult: most words are rare, and it’s common for words that look completely different to mean almost the same thing. The same words in a different order can mean something completely different. Even splitting text into useful word-like units can be difficult in many languages. "
+doc = nlp(sent)
+print("No of Sentence" , len(list(doc.sents)))
+for i in doc.sents:
+    print(i)
+```
+
+    No of Sentence 3
+    Processing raw text intelligently is difficult: most words are rare, and it’s common for words that look completely different to mean almost the same thing.
+    The same words in a different order can mean something completely different.
+    Even splitting text into useful word-like units can be difficult in many languages.
+    
+
+## Lemmatization & Stemming
+Lemmatization considers the context and converts the word to its meaningful base form, which is called Lemma
+
+Stemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling
+
+
+```python
+import nltk
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+```
+
+    [nltk_data] Downloading package omw-1.4 to
+    [nltk_data]     C:\Users\ujjal\AppData\Roaming\nltk_data...
+    
+
+
+
+
+    True
+
+
+
+
+```python
+from nltk.stem import PorterStemmer,WordNetLemmatizer
+text = "spaCy is an open-source software library for advanced natural language processing"
+st = PorterStemmer()
+lema = WordNetLemmatizer()
+for token in nlp(text):
+    print(token.text,'->',st.stem(token.text),lema.lemmatize(token.text),token.lemma_)
+```
+
+    spaCy -> spaci spaCy spacy
+    is -> is is be
+    an -> an an an
+    open -> open open open
+    - -> - - -
+    source -> sourc source source
+    software -> softwar software software
+    library -> librari library library
+    for -> for for for
+    advanced -> advanc advanced advanced
+    natural -> natur natural natural
+    language -> languag language language
+    processing -> process processing processing
+    
+
+## Named Entity Recognition (NER)
+
+spaCy features an extremely fast statistical entity recognition system, that assigns labels to contiguous spans of tokens. The default trained pipelines can identify a variety of named and numeric entities, including companies, locations, organizations and products.
+
+![image.png](attachment:image.png)
+
+
+```python
+sent = """
+We are looking for 8-10 years experienced DotNet Developer, JOB CODE - RDNLD2
+
+Job Description
+
+ Candidates with 8+ years of experience in IT industry and with strong .Net/.Net
+
+Core/Azure Cloud Service/ Azure DevOps.
+
+ Working hours – 8 hours , with a few hours of overlap during EST Time zone.
+
+ Expertise in working with Microsoft Technologies like C#, .Net Core , WEB API,
+
+ASP.Net MVC, ADO.Net, Entity Framework, IIS, Git
+
+ Hands on experience in Azure development , worked on Azure Web application,
+
+App Service, Azure Storage, Azure SQL database and Azure AD
+
+ Expertise in Microsoft Azure Cloud Service , Application Insights, Azure
+
+Monitoring, KeyVault and SQL Azure.
+
+ Hands on experience in building and deploying applications by adopting Azure
+
+DevOps practices such as Continuous Integration (CI) and Continuous
+
+Deployment (CD) in runtime with Git, Docker, Kubernetes and managing Azure
+
+Cloud Services.
+
+ Expertise in RDBMS including MS SQL Server with thorough knowledge in writing
+
+SQL queries, Stored Procedures, Views, Functions, Packages, Cursors &amp; tables
+
+and objects types.
+
+ Good knowledge of JavaScript, React JS, jQuery, Angular,, and other languages
+
+ Knowledge of architectural styles and design patterns, , experience in designing
+
+solutions
+
+ Broad and extensive knowledge of the software development life cycle (SDLC)
+
+with software development models like Agile, Scrum model, Jira models.
+
+ Designing, developing and executing software solutions to address business
+
+issues
+
+ Strong debugging and problem-solving skills
+
+ Manage, coordinate and support development team throughout the process
+
+ Perform object-oriented programming, data modelling and database creation.
+
+ Experience in Stakeholder Management (client facing roles)
+
+ Excellent communication and organizational skills
+
+
+
+﻿Responsibilities
+
+ Develop high-quality software design and architecture
+
+ Identify, prioritize and execute tasks in the software development life cycle
+
+ Guide team to write reusable, testable, performant and efficient code
+
+ Work with the team to define, design, and deliver on new features
+
+ Lead by example by designing and implementing clean best-practices
+
+maintainable code
+
+ Experience in large scale software development.
+
+Primary Skills
+
+ Expertise in C#, .Net Core, Entity framework, EF core, Microservices, Azure Cloud
+
+services, Azure DevOps
+
+ Expertise in RDBMS including MS SQL Server with thorough knowledge in writing
+
+SQL queries, Stored Procedures
+
+Soft Skills
+
+ Team Management
+
+ Communication Skills
+
+ Documentation skills
+
+ Leadership and ownership quality
+
+ Mentor junior team members
+
+
+
+"""
+```
+
+
+```python
+#label is hash value
+# sent = "spaCy is an open-source software library for advanced natural language processing"
+# sent = "Apple is looking at buying San Francisco startup "
+doc = nlp(sent)
+for ent in doc.ents:
+    print(ent.text,ent.label_,ent.start_char,ent.label)
+```
+
+    8-10 years DATE 20 391
+    DotNet Developer ORG 43 383
+    8+ years DATE 115 391
+    Working hours TIME 223 392
+    8 hours TIME 239 392
+    a few hours TIME 254 392
+    EST Time LOC 284 385
+    Expertise GPE 302 384
+    Microsoft Technologies ORG 328 383
+    MVC ORG 390 383
+    Entity Framework PERSON 404 380
+    Git PERSON 427 380
+    Azure Storage ORG 524 383
+    Expertise GPE 574 384
+    Microsoft Azure Cloud Service ORG 587 383
+    KeyVault ORG 660 383
+    SQL Azure ORG 673 383
+    DevOps ORG 765 383
+    Continuous Integration ORG 790 383
+    CI ORG 814 383
+    Continuous
+    
+    Deployment ORG 822 383
+    Git GPE 866 384
+    Docker GPE 871 384
+    Kubernetes ORG 879 383
+    Expertise GPE 929 384
+    MS SQL Server ORG 958 383
+    SQL ORG 1008 383
+    Stored Procedures PERSON 1021 380
+    Views ORG 1040 383
+    Functions PERSON 1047 380
+    Packages, Cursors & ORG 1058 383
+    JavaScript PRODUCT 1130 386
+    Broad ORG 1288 383
+    Agile ORG 1403 383
+    Jira PERSON 1423 380
+    Manage PRODUCT 1572 386
+    Stakeholder Management ORG 1738 383
+    Develop ORG 1860 383
+    Identify ORG 1917 383
+    Guide ORG 1998 383
+    Primary Skills PERSON 2278 380
+    Expertise GPE 2405 384
+    MS SQL Server ORG 2434 383
+    SQL ORG 2484 383
+    Soft Skills PERSON 2516 380
+    Team Management ORG 2531 383
+    Documentation PRODUCT 2574 386
+    Leadership NORP 2598 381
+    Mentor LOC 2634 385
+    
+
+
+```python
+from spacy import displacy
+displacy.render(doc,style= "ent",jupyter=True )
+```
+
+
+<span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr"></br>We are looking for 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    8-10 years
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ experienced 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    DotNet Developer
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, JOB CODE - RDNLD2</br></br>Job Description</br></br> Candidates with 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    8+ years
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ of experience in IT industry and with strong .Net/.Net</br></br>Core/Azure Cloud Service/ Azure DevOps.</br></br> 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Working hours
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span>
+</mark>
+ – 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    8 hours
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span>
+</mark>
+ , with 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    a few hours
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span>
+</mark>
+ of overlap during 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    EST Time
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+ zone.</br></br> 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Expertise
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ in working with 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Microsoft Technologies
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ like C#, .Net Core , WEB API,</br></br>ASP.Net 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    MVC
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, ADO.Net, 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Entity Framework
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+, IIS, 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Git
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+</br></br> Hands on experience in Azure development , worked on Azure Web application,</br></br>App Service, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Azure Storage
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, Azure SQL database and Azure AD</br></br> 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Expertise
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ in 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Microsoft Azure Cloud Service
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ , Application Insights, Azure</br></br>Monitoring, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    KeyVault
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ and 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    SQL Azure
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+.</br></br> Hands on experience in building and deploying applications by adopting Azure</br></br>
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    DevOps
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ practices such as 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Continuous Integration
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ (
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    CI
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+) and 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Continuous
+
+Deployment
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ (CD) in runtime with 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Git
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+, 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Docker
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Kubernetes
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ and managing Azure</br></br>Cloud Services.</br></br> 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Expertise
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ in RDBMS including 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    MS SQL Server
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ with thorough knowledge in writing</br></br>
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    SQL
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ queries, 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Stored Procedures
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Views
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Functions
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Packages, Cursors &amp;
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+amp; tables</br></br>and objects types.</br></br> Good knowledge of 
+<mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    JavaScript
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span>
+</mark>
+, React JS, jQuery, Angular,, and other languages</br></br> Knowledge of architectural styles and design patterns, , experience in designing</br></br>solutions</br></br> 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Broad
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ and extensive knowledge of the software development life cycle (SDLC)</br></br>with software development models like 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Agile
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, Scrum model, 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Jira
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+ models.</br></br> Designing, developing and executing software solutions to address business</br></br>issues</br></br> Strong debugging and problem-solving skills</br></br> 
+<mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Manage
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span>
+</mark>
+, coordinate and support development team throughout the process</br></br> Perform object-oriented programming, data modelling and database creation.</br></br> Experience in 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Stakeholder Management
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ (client facing roles)</br></br> Excellent communication and organizational skills</br></br></br></br>﻿Responsibilities</br></br> 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Develop
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ high-quality software design and architecture</br></br> 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Identify
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, prioritize and execute tasks in the software development life cycle</br></br> 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Guide
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ team to write reusable, testable, performant and efficient code</br></br> Work with the team to define, design, and deliver on new features</br></br> Lead by example by designing and implementing clean best-practices</br></br>maintainable code</br></br> Experience in large scale software development.</br></br>
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Primary Skills
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+</br></br> Expertise in C#, .Net Core, Entity framework, EF core, Microservices, Azure Cloud</br></br>services, Azure DevOps</br></br> 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Expertise
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ in RDBMS including 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    MS SQL Server
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ with thorough knowledge in writing</br></br>
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    SQL
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ queries, Stored Procedures</br></br>
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Soft Skills
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+</br></br> 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Team Management
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+</br></br> Communication Skills</br></br> 
+<mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Documentation
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span>
+</mark>
+ skills</br></br> 
+<mark class="entity" style="background: #c887fb; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Leadership
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">NORP</span>
+</mark>
+ and ownership quality</br></br> 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Mentor
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+ junior team members</br></br></br></br></div></span>
+
+
+
+```python
+
+```

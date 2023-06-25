@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="ujjal">
+<meta name="dcterms.date" content="2023-06-25">
+<meta name="description" content="Into to spacy">
+
+<title>ujjal - Spacy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ujjal</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../nlp/spacy.html">NLP</a></li><li class="breadcrumb-item"><a href="../nlp/spacy.html">Spacy</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Research-Paper-Implementation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">blogs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">ML</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">blogs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">NLP</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../nlp/spacy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spacy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../python/python_advance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Advance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#spacy" id="toc-spacy" class="nav-link active" data-scroll-target="#spacy">Spacy</a></li>
+  <li><a href="#tokenization" id="toc-tokenization" class="nav-link" data-scroll-target="#tokenization">Tokenization</a></li>
+  <li><a href="#part-of-speech-tagging" id="toc-part-of-speech-tagging" class="nav-link" data-scroll-target="#part-of-speech-tagging">Part-of-Speech Tagging</a></li>
+  <li><a href="#dependency-parsing" id="toc-dependency-parsing" class="nav-link" data-scroll-target="#dependency-parsing">Dependency Parsing</a></li>
+  <li><a href="#sentence-boundary-detectionsbd" id="toc-sentence-boundary-detectionsbd" class="nav-link" data-scroll-target="#sentence-boundary-detectionsbd">Sentence Boundary Detection(SBD)</a></li>
+  <li><a href="#lemmatization-stemming" id="toc-lemmatization-stemming" class="nav-link" data-scroll-target="#lemmatization-stemming">Lemmatization &amp; Stemming</a></li>
+  <li><a href="#named-entity-recognition-ner" id="toc-named-entity-recognition-ner" class="nav-link" data-scroll-target="#named-entity-recognition-ner">Named Entity Recognition (NER)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Spacy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">spacy</div>
+    <div class="quarto-category">nlp</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Into to spacy
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>ujjal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 25, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="spacy" class="level2">
+<h2 class="anchored" data-anchor-id="spacy">Spacy</h2>
+<p>spacy is open source library for NLP in python.</p>
+<p>Some Feature</p>
+<ul>
+<li><code>Tokenization</code> : split text into words, pancutation mark etc.</li>
+<li><code>Part-of-Speech Tagging</code> : assign grammertical label to each token.</li>
+<li><code>Named Entity Recognition (NER)</code> - spacy can identify named entity in text. such as people name, ORG name</li>
+<li><code>Dependency Parsing</code> - Dependency parsing is the process of extracting the dependency parse of a sentence to represent its grammatical structure.</li>
+<li><code>Lemmatization</code> - transform word into root word is called a lemma</li>
+<li><code>Sentence Boundary Detection(SBD)</code> - finding and segmenting individual sentence</li>
+<li><code>Entity Linking (EL)</code> -</li>
+<li><code>Similarity</code> - Comparing word, text span and document and how they similar to each other</li>
+<li><code>Eule-based matching1</code> -</li>
+<li><code>Training</code> -</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tokenization" class="level2">
+<h2 class="anchored" data-anchor-id="tokenization">Tokenization</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"spaCy is an open-source software library for advanced natural language processing"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> nlp(text):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>spaCy
+is
+an
+open
+-
+source
+software
+library
+for
+advanced
+natural
+language
+processing</code></pre>
+</section>
+<section id="part-of-speech-tagging" class="level2">
+<h2 class="anchored" data-anchor-id="part-of-speech-tagging">Part-of-Speech Tagging</h2>
+<p>assign grammertical label to each token.</p>
+<p>https://universaldependencies.org/u/pos/</p>
+<p><code>tag_</code> represents the detailed part-of-speech tag assigned to the token, which includes more specific information about the word’s grammatical properties. EX - “NN” for a noun or “VB” for a verb.</p>
+<p><code>pos_</code> it provides more general categorization of the word part of speech. ex - NOUN</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"spaCy is an open-source software library for advanced natural language processing"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span>[]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> nlp(text):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    l.append([token.text,token.pos_,token.tag_,spacy.explain(token.tag_),token.dep_, token.shape_, token.is_alpha])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(token.text,'-&gt;',token.pos_,'-&gt;',token.tag_,spacy.explain(token.tag_),token.dep_, token.shape_, token.is_alpha)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(l,columns <span class="op">=</span> [<span class="st">'tect'</span>,<span class="st">'pos_'</span>,<span class="st">'tag_'</span>,<span class="st">'explain_tag'</span>,<span class="st">'dep_'</span>,<span class="st">'shape_'</span>,<span class="st">'is_alpha'</span>])    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+tect
+</th>
+<th>
+pos_
+</th>
+<th>
+tag_
+</th>
+<th>
+explain_tag
+</th>
+<th>
+dep_
+</th>
+<th>
+shape_
+</th>
+<th>
+is_alpha
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+spaCy
+</td>
+<td>
+INTJ
+</td>
+<td>
+UH
+</td>
+<td>
+interjection
+</td>
+<td>
+nsubj
+</td>
+<td>
+xxxXx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+is
+</td>
+<td>
+AUX
+</td>
+<td>
+VBZ
+</td>
+<td>
+verb, 3rd person singular present
+</td>
+<td>
+ROOT
+</td>
+<td>
+xx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+an
+</td>
+<td>
+DET
+</td>
+<td>
+DT
+</td>
+<td>
+determiner
+</td>
+<td>
+det
+</td>
+<td>
+xx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+open
+</td>
+<td>
+ADJ
+</td>
+<td>
+JJ
+</td>
+<td>
+adjective (English), other noun-modifier (Chin…
+</td>
+<td>
+amod
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+-
+</td>
+<td>
+PUNCT
+</td>
+<td>
+HYPH
+</td>
+<td>
+punctuation mark, hyphen
+</td>
+<td>
+punct
+</td>
+<td>
+-
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+5
+</th>
+<td>
+source
+</td>
+<td>
+NOUN
+</td>
+<td>
+NN
+</td>
+<td>
+noun, singular or mass
+</td>
+<td>
+compound
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+6
+</th>
+<td>
+software
+</td>
+<td>
+NOUN
+</td>
+<td>
+NN
+</td>
+<td>
+noun, singular or mass
+</td>
+<td>
+compound
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+7
+</th>
+<td>
+library
+</td>
+<td>
+NOUN
+</td>
+<td>
+NN
+</td>
+<td>
+noun, singular or mass
+</td>
+<td>
+attr
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+8
+</th>
+<td>
+for
+</td>
+<td>
+ADP
+</td>
+<td>
+IN
+</td>
+<td>
+conjunction, subordinating or preposition
+</td>
+<td>
+prep
+</td>
+<td>
+xxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+9
+</th>
+<td>
+advanced
+</td>
+<td>
+ADJ
+</td>
+<td>
+JJ
+</td>
+<td>
+adjective (English), other noun-modifier (Chin…
+</td>
+<td>
+amod
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+10
+</th>
+<td>
+natural
+</td>
+<td>
+ADJ
+</td>
+<td>
+JJ
+</td>
+<td>
+adjective (English), other noun-modifier (Chin…
+</td>
+<td>
+amod
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+11
+</th>
+<td>
+language
+</td>
+<td>
+NOUN
+</td>
+<td>
+NN
+</td>
+<td>
+noun, singular or mass
+</td>
+<td>
+compound
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+12
+</th>
+<td>
+processing
+</td>
+<td>
+NOUN
+</td>
+<td>
+NN
+</td>
+<td>
+noun, singular or mass
+</td>
+<td>
+pobj
+</td>
+<td>
+xxxx
+</td>
+<td>
+True
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</section>
+<section id="dependency-parsing" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-parsing">Dependency Parsing</h2>
+<p>It analyzes the syntactic structure of a sentence and assigns grammatical relationships between words, creating a parse tree representation</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spacy <span class="im">import</span> displacy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"spaCy is an open-source software library for advanced natural language processing"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>options <span class="op">=</span> {<span class="st">"compact"</span>:<span class="va">True</span>, <span class="st">"distance"</span>:<span class="dv">100</span>, <span class="st">"bg"</span>:<span class="st">"#0095b6"</span>, <span class="st">"color"</span>:<span class="st">"#DDDDDD"</span>, <span class="st">"font"</span>:<span class="st">"Source Sans Pro"</span>}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>displacy.render(doc, style<span class="op">=</span><span class="st">'dep'</span>, jupyter<span class="op">=</span><span class="va">True</span>,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" lang="en" id="e8499767c94b4b49a9384825cade0386-0" class="displacy" width="2150" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr"> <text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="50">spaCy</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">INTJ</tspan> </text></svg></span></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="225">is</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">AUX</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="400">an</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">DET</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="575">open-</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADJ</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="750">source</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="925">software</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">NOUN</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1100">library</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">NOUN</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1275">for</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADP</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1450">advanced</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">ADJ</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1625">natural</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADJ</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1800">language</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">NOUN</tspan> </text></p>
+<p><text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0"> <tspan class="displacy-word" fill="currentColor" x="1975">processing</tspan> <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1975">NOUN</tspan> </text></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-0" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-0" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textpath> </text> <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-1" stroke-width="2px" d="M420,352.0 C420,89.5 1095.0,89.5 1095.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-1" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textpath> </text> <path class="displacy-arrowhead" d="M420,354.0 L412,342.0 428,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-2" stroke-width="2px" d="M595,352.0 C595,264.5 735.0,264.5 735.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-2" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textpath> </text> <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-3" stroke-width="2px" d="M770,352.0 C770,177.0 1090.0,177.0 1090.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-3" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textpath> </text> <path class="displacy-arrowhead" d="M770,354.0 L762,342.0 778,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-4" stroke-width="2px" d="M945,352.0 C945,264.5 1085.0,264.5 1085.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-4" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textpath> </text> <path class="displacy-arrowhead" d="M945,354.0 L937,342.0 953,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-5" stroke-width="2px" d="M245,352.0 C245,2.0 1100.0,2.0 1100.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-5" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">attr</textpath> </text> <path class="displacy-arrowhead" d="M1100.0,354.0 L1108.0,342.0 1092.0,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-6" stroke-width="2px" d="M1120,352.0 C1120,264.5 1260.0,264.5 1260.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-6" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textpath> </text> <path class="displacy-arrowhead" d="M1260.0,354.0 L1268.0,342.0 1252.0,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-7" stroke-width="2px" d="M1470,352.0 C1470,177.0 1965.0,177.0 1965.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-7" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textpath> </text> <path class="displacy-arrowhead" d="M1470,354.0 L1462,342.0 1478,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-8" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-8" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textpath> </text> <path class="displacy-arrowhead" d="M1645,354.0 L1637,342.0 1653,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-9" stroke-width="2px" d="M1820,352.0 C1820,264.5 1960.0,264.5 1960.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-9" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textpath> </text> <path class="displacy-arrowhead" d="M1820,354.0 L1812,342.0 1828,342.0" fill="currentColor"> </path></path></g></p>
+<p><g class="displacy-arrow"> <path class="displacy-arc" id="arrow-e8499767c94b4b49a9384825cade0386-0-10" stroke-width="2px" d="M1295,352.0 C1295,89.5 1970.0,89.5 1970.0,352.0" fill="none" stroke="currentColor"> <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px"> <textpath xlink:href="#arrow-e8499767c94b4b49a9384825cade0386-0-10" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textpath> </text> <path class="displacy-arrowhead" d="M1970.0,354.0 L1978.0,342.0 1962.0,342.0" fill="currentColor"> </path></path></g> </p>
+</section>
+<section id="sentence-boundary-detectionsbd" class="level2">
+<h2 class="anchored" data-anchor-id="sentence-boundary-detectionsbd">Sentence Boundary Detection(SBD)</h2>
+<p>finding start and end of the sentence</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sent <span class="op">=</span> <span class="st">"Processing raw text intelligently is difficult: most words are rare, and it’s common for words that look completely different to mean almost the same thing. The same words in a different order can mean something completely different. Even splitting text into useful word-like units can be difficult in many languages. "</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(sent)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"No of Sentence"</span> , <span class="bu">len</span>(<span class="bu">list</span>(doc.sents)))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> doc.sents:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>No of Sentence 3
+Processing raw text intelligently is difficult: most words are rare, and it’s common for words that look completely different to mean almost the same thing.
+The same words in a different order can mean something completely different.
+Even splitting text into useful word-like units can be difficult in many languages.</code></pre>
+</section>
+<section id="lemmatization-stemming" class="level2">
+<h2 class="anchored" data-anchor-id="lemmatization-stemming">Lemmatization &amp; Stemming</h2>
+<p>Lemmatization considers the context and converts the word to its meaningful base form, which is called Lemma</p>
+<p>Stemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'wordnet'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'omw-1.4'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[nltk_data] Downloading package omw-1.4 to
+[nltk_data]     C:\Users\ujjal\AppData\Roaming\nltk_data...
+
+
+
+
+
+True</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer,WordNetLemmatizer</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"spaCy is an open-source software library for advanced natural language processing"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> PorterStemmer()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>lema <span class="op">=</span> WordNetLemmatizer()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> nlp(text):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(token.text,<span class="st">'-&gt;'</span>,st.stem(token.text),lema.lemmatize(token.text),token.lemma_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>spaCy -&gt; spaci spaCy spacy
+is -&gt; is is be
+an -&gt; an an an
+open -&gt; open open open
+- -&gt; - - -
+source -&gt; sourc source source
+software -&gt; softwar software software
+library -&gt; librari library library
+for -&gt; for for for
+advanced -&gt; advanc advanced advanced
+natural -&gt; natur natural natural
+language -&gt; languag language language
+processing -&gt; process processing processing</code></pre>
+</section>
+<section id="named-entity-recognition-ner" class="level2">
+<h2 class="anchored" data-anchor-id="named-entity-recognition-ner">Named Entity Recognition (NER)</h2>
+<p>spaCy features an extremely fast statistical entity recognition system, that assigns labels to contiguous spans of tokens. The default trained pipelines can identify a variety of named and numeric entities, including companies, locations, organizations and products.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="attachment:image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sent <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">We are looking for 8-10 years experienced DotNet Developer, JOB CODE - RDNLD2</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">Job Description</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st"> Candidates with 8+ years of experience in IT industry and with strong .Net/.Net</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">Core/Azure Cloud Service/ Azure DevOps.</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="st"> Working hours – 8 hours , with a few hours of overlap during EST Time zone.</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="st"> Expertise in working with Microsoft Technologies like C#, .Net Core , WEB API,</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="st">ASP.Net MVC, ADO.Net, Entity Framework, IIS, Git</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="st"> Hands on experience in Azure development , worked on Azure Web application,</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="st">App Service, Azure Storage, Azure SQL database and Azure AD</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="st"> Expertise in Microsoft Azure Cloud Service , Application Insights, Azure</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="st">Monitoring, KeyVault and SQL Azure.</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="st"> Hands on experience in building and deploying applications by adopting Azure</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="st">DevOps practices such as Continuous Integration (CI) and Continuous</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="st">Deployment (CD) in runtime with Git, Docker, Kubernetes and managing Azure</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="st">Cloud Services.</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="st"> Expertise in RDBMS including MS SQL Server with thorough knowledge in writing</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="st">SQL queries, Stored Procedures, Views, Functions, Packages, Cursors &amp;amp; tables</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="st">and objects types.</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="st"> Good knowledge of JavaScript, React JS, jQuery, Angular,, and other languages</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="st"> Knowledge of architectural styles and design patterns, , experience in designing</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="st">solutions</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="st"> Broad and extensive knowledge of the software development life cycle (SDLC)</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="st">with software development models like Agile, Scrum model, Jira models.</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="st"> Designing, developing and executing software solutions to address business</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="st">issues</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="st"> Strong debugging and problem-solving skills</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="st"> Manage, coordinate and support development team throughout the process</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="st"> Perform object-oriented programming, data modelling and database creation.</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="st"> Experience in Stakeholder Management (client facing roles)</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="st"> Excellent communication and organizational skills</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="st">﻿Responsibilities</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="st"> Develop high-quality software design and architecture</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="st"> Identify, prioritize and execute tasks in the software development life cycle</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="st"> Guide team to write reusable, testable, performant and efficient code</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="st"> Work with the team to define, design, and deliver on new features</span></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="st"> Lead by example by designing and implementing clean best-practices</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="st">maintainable code</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="st"> Experience in large scale software development.</span></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="st">Primary Skills</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="st"> Expertise in C#, .Net Core, Entity framework, EF core, Microservices, Azure Cloud</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="st">services, Azure DevOps</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="st"> Expertise in RDBMS including MS SQL Server with thorough knowledge in writing</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="st">SQL queries, Stored Procedures</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="st">Soft Skills</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a><span class="st"> Team Management</span></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="st"> Communication Skills</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="st"> Documentation skills</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="st"> Leadership and ownership quality</span></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="st"> Mentor junior team members</span></span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#label is hash value</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sent = "spaCy is an open-source software library for advanced natural language processing"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sent = "Apple is looking at buying San Francisco startup "</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(sent)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ent <span class="kw">in</span> doc.ents:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(ent.text,ent.label_,ent.start_char,ent.label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>8-10 years DATE 20 391
+DotNet Developer ORG 43 383
+8+ years DATE 115 391
+Working hours TIME 223 392
+8 hours TIME 239 392
+a few hours TIME 254 392
+EST Time LOC 284 385
+Expertise GPE 302 384
+Microsoft Technologies ORG 328 383
+MVC ORG 390 383
+Entity Framework PERSON 404 380
+Git PERSON 427 380
+Azure Storage ORG 524 383
+Expertise GPE 574 384
+Microsoft Azure Cloud Service ORG 587 383
+KeyVault ORG 660 383
+SQL Azure ORG 673 383
+DevOps ORG 765 383
+Continuous Integration ORG 790 383
+CI ORG 814 383
+Continuous
+
+Deployment ORG 822 383
+Git GPE 866 384
+Docker GPE 871 384
+Kubernetes ORG 879 383
+Expertise GPE 929 384
+MS SQL Server ORG 958 383
+SQL ORG 1008 383
+Stored Procedures PERSON 1021 380
+Views ORG 1040 383
+Functions PERSON 1047 380
+Packages, Cursors &amp; ORG 1058 383
+JavaScript PRODUCT 1130 386
+Broad ORG 1288 383
+Agile ORG 1403 383
+Jira PERSON 1423 380
+Manage PRODUCT 1572 386
+Stakeholder Management ORG 1738 383
+Develop ORG 1860 383
+Identify ORG 1917 383
+Guide ORG 1998 383
+Primary Skills PERSON 2278 380
+Expertise GPE 2405 384
+MS SQL Server ORG 2434 383
+SQL ORG 2484 383
+Soft Skills PERSON 2516 380
+Team Management ORG 2531 383
+Documentation PRODUCT 2574 386
+Leadership NORP 2598 381
+Mentor LOC 2634 385</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spacy <span class="im">import</span> displacy</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>displacy.render(doc,style<span class="op">=</span> <span class="st">"ent"</span>,jupyter<span class="op">=</span><span class="va">True</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span class="tex2jax_ignore">
+<div class="entities" style="line-height: 2.5; direction: ltr">
+<p><br>We are looking for <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> 8-10 years <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span> </mark> experienced <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> DotNet Developer <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , JOB CODE - RDNLD2<br><br>Job Description<br><br> Candidates with <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> 8+ years <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span> </mark> of experience in IT industry and with strong .Net/.Net<br><br>Core/Azure Cloud Service/ Azure DevOps.<br><br> <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Working hours <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span> </mark> – <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> 8 hours <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span> </mark> , with <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> a few hours <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">TIME</span> </mark> of overlap during <mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> EST Time <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span> </mark> zone.<br><br> <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Expertise <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> in working with <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Microsoft Technologies <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> like C#, .Net Core , WEB API,<br><br>ASP.Net <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> MVC <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , ADO.Net, <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Entity Framework <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> , IIS, <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Git <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> <br><br> Hands on experience in Azure development , worked on Azure Web application,<br><br>App Service, <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Azure Storage <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , Azure SQL database and Azure AD<br><br> <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Expertise <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> in <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Microsoft Azure Cloud Service <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , Application Insights, Azure<br><br>Monitoring, <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> KeyVault <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> and <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> SQL Azure <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> .<br><br> Hands on experience in building and deploying applications by adopting Azure<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> DevOps <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> practices such as <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Continuous Integration <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> ( <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> CI <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> ) and <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Continuous</mark></p>
+Deployment <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>  (CD) in runtime with <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Git <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> , <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Docker <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> , <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Kubernetes <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> and managing Azure<br><br>Cloud Services.<br><br> <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Expertise <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> in RDBMS including <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> MS SQL Server <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> with thorough knowledge in writing<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> SQL <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> queries, <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Stored Procedures <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> , <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Views <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Functions <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> , <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Packages, Cursors &amp; <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> amp; tables<br><br>and objects types.<br><br> Good knowledge of <mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> JavaScript <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span> </mark> , React JS, jQuery, Angular,, and other languages<br><br> Knowledge of architectural styles and design patterns, , experience in designing<br><br>solutions<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Broad <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> and extensive knowledge of the software development life cycle (SDLC)<br><br>with software development models like <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Agile <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , Scrum model, <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Jira <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> models.<br><br> Designing, developing and executing software solutions to address business<br><br>issues<br><br> Strong debugging and problem-solving skills<br><br> <mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Manage <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span> </mark> , coordinate and support development team throughout the process<br><br> Perform object-oriented programming, data modelling and database creation.<br><br> Experience in <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Stakeholder Management <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> (client facing roles)<br><br> Excellent communication and organizational skills<br><br><br><br>﻿Responsibilities<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Develop <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> high-quality software design and architecture<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Identify <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> , prioritize and execute tasks in the software development life cycle<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Guide <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> team to write reusable, testable, performant and efficient code<br><br> Work with the team to define, design, and deliver on new features<br><br> Lead by example by designing and implementing clean best-practices<br><br>maintainable code<br><br> Experience in large scale software development.<br><br> <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Primary Skills <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> <br><br> Expertise in C#, .Net Core, Entity framework, EF core, Microservices, Azure Cloud<br><br>services, Azure DevOps<br><br> <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Expertise <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span> </mark> in RDBMS including <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> MS SQL Server <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> with thorough knowledge in writing<br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> SQL <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> queries, Stored Procedures<br><br> <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Soft Skills <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span> </mark> <br><br> <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Team Management <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span> </mark> <br><br> Communication Skills<br><br> <mark class="entity" style="background: #bfeeb7; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Documentation <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PRODUCT</span> </mark> skills<br><br> <mark class="entity" style="background: #c887fb; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Leadership <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">NORP</span> </mark> and ownership quality<br><br> <mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;"> Mentor <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span> </mark> junior team members<br><br><br><br>
+</div>
+<p></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</span></section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2021, ujjal</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ujjalkumarmaity/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/ujjalkumar/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

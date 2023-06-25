@@ -42,7 +42,7 @@ website:
           - index.qmd     
       - section: "NLP"
         contents:
-          - index.qmd                       
+          - nlp/spacy.qmd                       
       - section: "Python"
         contents:
           - python/python_advance.qmd
@@ -72,3 +72,13 @@ format:
 
 
 
+# ---
+# title: "Post With Code"
+# description: "Post description"
+# author: "Fizz McPhee"
+# date: "5/22/2021"
+# categories:
+#   - news
+#   - code
+#   - analysis
+# ---
