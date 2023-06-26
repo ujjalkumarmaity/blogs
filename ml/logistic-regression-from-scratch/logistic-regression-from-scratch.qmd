@@ -1,0 +1,650 @@
+---
+title: "Logistic Regression"
+description: "All about Logistic Regression"
+author: "ujjal"
+date: "5/26/2023"
+categories:
+  - ML
+  - python
+---
+
+### Table of content
+1. [Logistic Regression](#0)
+1. [EDA](#2)
+1. [Data Visulization](#4)
+1. [Logistic Regression using Gradient Descent ](#6)
+1. [Logistic Regression using Mini-batch SGD](#8)
+1. [Logistic Regression using SGD with momentum](#10)
+1. [Logistic Regression using using sklearn](#12)
+
+## Logistic Regression<a id=0></a>
+
+Logistic regression is a statistical algorithm used for binary classification.Logistic regression is a type of supervised learning
+
+
+Given an input feature vector `x` , Here we want to recognize this feature vector belongs to `class 0` ot `class 1`
+
+$\hat{y}$= $p(y=1|x)$ , here $0<=\hat{y} <=1$
+
+Here $x$ is feature vector.<br>
+parameter - $w$ <br>
+If assuming a linear relationship between the input features and target variable. then $\hat{y} = x*w^T$ <br>
+$xw^T$ can be much bigger then 1 or can be negative. but here we want predicted output should be between -0 and 1.<br>
+
+In **Logistic Regression** we use sigmiod function $\hat{y} = \sigma(x*w^T)$
+
+<img src = 'https://mathworld.wolfram.com/images/eps-svg/SigmoidFunction_701.svg'>
+
+$\sigma(x) = {1\over(1+e^{-x})}$ if $x$ is very large then $e^{-x}$ close to 0, $\sigma(x) = 1$ <br>
+if $x$ is very small then $e^{-x}$ is huge number, $\sigma(x) = 0$ <br>
+
+
+
+### Loss function 
+In logistic regression loss function $L(y,\hat{y}) = (1/2)*(y-\hat{y})^2 $ not work well.<br>
+we use following loss function<br>
+$$L(y,\hat{y}) = - y log(\hat{y}) - (1-y) log(1 - \hat{y})
+$$
+if $y=1$ then $L(y,\hat{y}) = - y log(\hat{y})$  `<-` that means we want $y log(\hat{y})$ as large as possible, `<-` that means $\hat{y}$ will be large. So if y = 1 , then we want $\hat{y}$ as biggest as possible.<br>
+if $y=0$ then $L(y,\hat{y}) = - (1-y) log(1-\hat{y})$  `<-` that means we want $log(1-\hat{y})$  large, `<-` that means $\hat{y}$ will be small.<br>
+
+### cost function
+$$J(W) =(1/m) \sum L(y,\hat{y}) 
+$$
+
+
+
+```python
+
+```
+
+
+```python
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 5GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+    /kaggle/input/logistic-regression/Social_Network_Ads.csv
+    
+
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler,LabelEncoder,MinMaxScaler
+import seaborn as sns
+from sklearn.decomposition import PCA
+```
+
+
+```python
+df=pd.read_csv('/kaggle/input/logistic-regression/Social_Network_Ads.csv')
+df.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+# EDA<a id=2></a>
+
+
+```python
+# Drop User id
+len(df['User ID'].unique())
+df.drop(columns=['User ID'],inplace=True)
+```
+
+
+```python
+df.describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>400.000000</td>
+      <td>400.000000</td>
+      <td>400.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>37.655000</td>
+      <td>69742.500000</td>
+      <td>0.357500</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>10.482877</td>
+      <td>34096.960282</td>
+      <td>0.479864</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>18.000000</td>
+      <td>15000.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>29.750000</td>
+      <td>43000.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>37.000000</td>
+      <td>70000.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>46.000000</td>
+      <td>88000.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>60.000000</td>
+      <td>150000.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+df.isnull().sum()
+```
+
+
+
+
+    Gender             0
+    Age                0
+    EstimatedSalary    0
+    Purchased          0
+    dtype: int64
+
+
+
+
+```python
+df.dtypes
+```
+
+
+
+
+    Gender             object
+    Age                 int64
+    EstimatedSalary     int64
+    Purchased           int64
+    dtype: object
+
+
+
+
+```python
+#conert categorical feature to numarical feature
+le=LabelEncoder()
+df['Gender']=le.fit_transform(df['Gender'])
+```
+
+
+```python
+#Normalize the data
+sc=MinMaxScaler()
+df_n=sc.fit_transform(df.iloc[:,:-1])
+```
+
+
+```python
+#train test split
+x_train,x_test,y_train,y_test=train_test_split(df_n,df['Purchased'])
+y_train.reset_index(drop=True,inplace=True)
+y_test.reset_index(drop=True,inplace=True)
+x=x_train
+y=y_train
+```
+
+# Data Visulization<a id=4></a>
+
+
+```python
+#pairplot
+sns.pairplot(df,hue='Purchased')
+```
+
+
+
+
+    <seaborn.axisgrid.PairGrid at 0x7fd93691a410>
+
+
+
+
+    
+![png](output_17_1.png)
+    
+
+
+
+```python
+sns.boxplot(x='Purchased',y='EstimatedSalary',data=df)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7fd936293d10>
+
+
+
+
+    
+![png](output_18_1.png)
+    
+
+
+
+```python
+sns.boxplot(x='Purchased',y='Age',data=df)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7fd934a0a790>
+
+
+
+
+    
+![png](output_19_1.png)
+    
+
+
+
+```python
+#pie plot
+df_gender=df[['Gender','Purchased']].groupby('Purchased').sum()
+df_gender.index=['Male','Female']
+df_gender['Gender'].plot(kind='pie',autopct='%1.1f%%')
+plt.show()
+```
+
+
+    
+![png](output_20_0.png)
+    
+
+
+# Logistic Regression using Gradient Descent <a id=6></a>
+
+
+```python
+def sigmoid(x,w,b):
+    return 1/(1+np.exp(-(np.dot(x,w)+b)))
+def loss(x,w,y,b):
+    s=sigmoid(x,w,b)
+    return np.mean(-(y*np.log(s))- ((1-y)*np.log(1-s)))
+def grad(x,y,w,b):
+    s=sigmoid(x,w,b)    
+    return np.dot(x.T,(s-y))/x.shape[0]
+```
+
+
+```python
+def accuracy(y_pred,y_test):
+    return np.mean(y_pred==y_test)
+```
+
+
+```python
+# initilize w and b
+def gradientdescent(x,y):
+    w=np.zeros((x.shape[1]))
+    b=np.zeros(1)
+    ite=1000 #number of iteration
+    eta=0.7 #learning rate
+    loss_v=[]
+    for i in range(ite):
+        probability=sigmoid(x,w,b)
+        l=loss(x,w,y,b)
+        gradient=grad(x,y,w,b)
+        w=w- (eta*gradient)
+        b=b-(eta*np.sum(probability-y)/x.shape[0])
+        loss_v.append(l)
+        if i%100==0:
+            print(l)
+    return w,b,loss_v
+```
+
+
+```python
+w,b,loss_v=gradientdescent(x,y)
+y_pred=sigmoid(x_test,w,b)
+for j,i in enumerate(y_pred):
+    if i<0.5:
+        y_pred[j]=0
+    else:
+        y_pred[j]=1
+
+print('test accuracy',accuracy(y_pred,y_test))
+```
+
+    0.6931471805599467
+    0.46824620053813504
+    0.41373079197199336
+    0.3897267439098201
+    0.37674477979951454
+    0.36885655071698165
+    0.363696412749435
+    0.36014577026616207
+    0.3576113857482108
+    0.35575160674492456
+    test accuracy 0.86
+    
+
+
+```python
+plt.plot(range(len(loss_v)),loss_v)
+plt.xlabel('iteration')
+plt.ylabel('loss')
+plt.show()
+```
+
+
+    
+![png](output_26_0.png)
+    
+
+
+# Logistic Regression using Mini-batch SGD<a id=8></a>
+
+
+```python
+batch_size=8
+def sgd(x,y,batch_size):
+    # initilize w and b
+    w=np.zeros((x_train.shape[1]))
+    b=np.zeros(1)
+    ite=1000 #number of iteration
+    eta=0.7 #learning rate
+    loss_v=[]
+    for i in range(1000):
+        ind=np.random.choice(len(y_train),batch_size)
+        x_b=x[ind]
+        y_b=y[ind]
+        p=sigmoid(x_b,w,b)
+        l=loss(x_b,w,y_b,b)
+        gradient=grad(x_b,y_b,w,b)
+        w=w- (0.1*gradient)
+        b=b-(eta*np.sum(p-y_b)/x.shape[0])
+        if i%10==0:
+            loss_v.append(l)
+        if i%100==0:
+            print('loss',l)
+    return w,b,loss_v
+```
+
+
+```python
+w,b,loss_v=sgd(x,y,32)
+y_pred=sigmoid(x_test,w,b)
+for j,i in enumerate(y_pred):
+    if i<0.5:
+        y_pred[j]=0
+    else:
+        y_pred[j]=1
+
+print('test accuracy',accuracy(y_pred,y_test))
+```
+
+    loss 0.6931471805599448
+    loss 0.6278149588111854
+    loss 0.6035356489914048
+    loss 0.4881741340927539
+    loss 0.5486975396008116
+    loss 0.4963472981460031
+    loss 0.4807055091535177
+    loss 0.5649417248839724
+    loss 0.4608513419074556
+    loss 0.5171429870812208
+    test accuracy 0.84
+    
+
+
+```python
+plt.plot(range(len(loss_v)),loss_v)
+plt.xlabel('iteration')
+plt.ylabel('loss')
+plt.show()
+```
+
+
+    
+![png](output_30_0.png)
+    
+
+
+# Logistic Regression using SGD with momentum<a id=10></a>
+
+
+```python
+batch_size=8
+def sgdmomentum(x,y,batch_size):
+    # initilize w and b
+    w=np.zeros((x_train.shape[1]))
+    b=np.zeros(1)
+    ite=1000 #number of iteration
+    eta=0.7 #learning rate
+    alpha=0.9
+    loss_v=[]
+    v_t=np.zeros((x_train.shape[1])) 
+    v_b=np.zeros(1)
+    for i in range(1000):
+        ind=np.random.choice(len(y_train),batch_size)
+        x_b=x[ind]
+        y_b=y[ind]
+        p=sigmoid(x_b,w,b)
+        l=loss(x_b,w,y_b,b)
+        gradient=grad(x_b,y_b,w,b)
+        v_t =(alpha*v_t) + (eta*gradient)
+        w=w-v_t
+        v_b=(alpha*v_b) + (eta*np.sum(p-y_b)/x.shape[0])
+        b=b-v_b
+        if i%10==0:
+            loss_v.append(l)
+        if i%100==0:
+            print('loss',l)
+    return w,b,loss_v
+```
+
+
+```python
+w,b,loss_v=sgdmomentum(x,y,32)
+```
+
+    loss 0.6931471805599448
+    loss 0.4220835670845099
+    loss 0.2941736243371927
+    loss 0.44537673992679633
+    loss 0.2871349895011394
+    loss 0.6241278912840013
+    loss 0.34683687828696796
+    loss 0.18828219280440267
+    loss 0.4223695477823046
+    loss 0.34499265763927867
+    
+
+
+```python
+plt.plot(range(len(loss_v)),loss_v)
+plt.xlabel('iteration')
+plt.ylabel('loss')
+plt.show()
+```
+
+
+    
+![png](output_34_0.png)
+    
+
+
+
+```python
+#Predction
+y_pred=sigmoid(x_test,w,b)
+for j,i in enumerate(y_pred):
+    if i<0.5:
+        y_pred[j]=0
+    else:
+        y_pred[j]=1
+
+print('test accuracy',accuracy(y_pred,y_test))
+```
+
+    test accuracy 0.86
+    
+
+# Logistic Regression using Using sklearn<a id=12></a>
+
+
+```python
+from sklearn.linear_model import LogisticRegression
+```
+
+
+```python
+model= LogisticRegression()
+model.fit(x_train,y_train)
+y_pred=model.predict(x_test)
+print('test accuracy',accuracy(y_pred,y_test))
+```
+
+    test accuracy 0.82
+    
+
+
+```python
+
+```

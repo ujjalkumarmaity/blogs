@@ -39,9 +39,16 @@ website:
           - index.qmd
       - section: "ML"
         contents:
-          - index.qmd     
+          - ml/logistic-regression-from-scratch/logistic-regression-from-scratch.qmd
+
+
+
+
       - section: "NLP"
         contents:
+          - section: "Resume Parsing"
+            contents:
+              - nlp/spacy.qmd       
           - nlp/spacy.qmd                       
       - section: "Python"
         contents:
