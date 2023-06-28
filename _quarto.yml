@@ -46,7 +46,7 @@ website:
 
       - section: "NLP"
         contents:
-          - nlp/RNN.qmd
+          - nlp/rnn/RNN.qmd
           - section: "Resume Parsing"
             contents:
               - nlp/spacy.qmd       
