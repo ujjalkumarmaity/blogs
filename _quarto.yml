@@ -25,7 +25,7 @@ website:
     search: true
     right:
       - text: "Home"
-        file: ml/logistic-regression-from-scratch/logistic-regression-from-scratch.qmd
+        file: index.qmd
         #index.qmd
       - text: "About Me"
         file: about.qmd

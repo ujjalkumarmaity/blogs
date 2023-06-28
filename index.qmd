@@ -2,4 +2,8 @@
 title: "blogs"
 ---
 
-Coming Soon
+
+# [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
+Implement logistic regression in python from scratch
+
+# [Into To Spacy ](nlp/spacy.html)
