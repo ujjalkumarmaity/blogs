@@ -2,8 +2,14 @@
 title: "blogs"
 ---
 
+## [RNN (Recurrent Neural Network)](nlp/rnn/RNN.html)
+In this post we’ll take a look at RNN (Recurrent Neural Network).
 
-# [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
-Implement logistic regression in python from scratch
+## [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
+In this post we’ll take a look at logistic regression and implement using python from scratch
 
-# [Into To Spacy ](nlp/spacy.html)
+## [Spacy Tutorial ](nlp/spacy.html)
+In this article we’ll understand basic feature of spacy.
+
+## [Python Tutorial ](python/python_advance.html)
+In this post we'll go through Python Interview Questions
