@@ -1,0 +1,11 @@
+---
+title: "blogs"
+---
+
+##
+
+## [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
+In this article we’ll implement logistic regression in python from scratch
+
+## [Into To Spacy ](nlp/spacy.html)
+In this article we’ll understand basic feature of spacy
