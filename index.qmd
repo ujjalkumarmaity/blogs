@@ -2,6 +2,9 @@
 title: "blogs"
 ---
 
+## [LSTM (Long Short-Term Memory)](nlp/lstm/LSTM.html)
+In this post we’ll take a look at LSTM (Long Short-Term Memory).
+
 ## [RNN (Recurrent Neural Network)](nlp/rnn/RNN.html)
 In this post we’ll take a look at RNN (Recurrent Neural Network).
 

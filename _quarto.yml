@@ -63,7 +63,7 @@ website:
       #     - python/about1.qmd
 
   page-footer: 
-    left: "Copyright 2021, ujjal" 
+    # left: "Copyright 2021, ujjal" 
     right: 
       - icon: github
         href: https://github.com/ujjalkumarmaity/
@@ -71,7 +71,8 @@ website:
         href: https://www.linkedin.com/in/ujjalkumar/
       - icon: twitter 
         href: https://twitter.com/ 
-
+      - icon: youtube 
+        href: https://www.youtube.com/channel/UCypg_Mb5eGxA0S5P4_l4uKg/ 
 
 format:
   html:

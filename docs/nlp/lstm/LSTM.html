@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-05-30">
 
-<title>ujjal - blogs</title>
+<title>ujjal - LSTM (Long Short-Term Memory)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -71,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">ujjal</span>
     </a>
   </div>
@@ -82,11 +117,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About Me</span></a>
   </li>  
 </ul>
@@ -100,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">blogs</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LSTM (Long Short-Term Memory)</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -131,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html" class="sidebar-item-text sidebar-link">
+  <a href="../../ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logistic Regression</span></a>
   </div>
 </li>
@@ -148,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nlp/rnn/RNN.html" class="sidebar-item-text sidebar-link">
+  <a href="../../nlp/rnn/RNN.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RNN (Recurrent Neural Network)</span></a>
   </div>
 </li>
@@ -163,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nlp/spacy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../nlp/spacy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Spacy</span></a>
   </div>
 </li>
@@ -171,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nlp/spacy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../nlp/spacy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Spacy</span></a>
   </div>
 </li>
@@ -188,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python/python_advance.html" class="sidebar-item-text sidebar-link">
+  <a href="../../python/python_advance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python Advance</span></a>
   </div>
 </li>
@@ -204,11 +239,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lstm-long-short-term-memory" id="toc-lstm-long-short-term-memory" class="nav-link active" data-scroll-target="#lstm-long-short-term-memory">LSTM (Long Short-Term Memory)</a></li>
-  <li><a href="#rnn-recurrent-neural-network" id="toc-rnn-recurrent-neural-network" class="nav-link" data-scroll-target="#rnn-recurrent-neural-network">RNN (Recurrent Neural Network)</a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
-  <li><a href="#spacy-tutorial" id="toc-spacy-tutorial" class="nav-link" data-scroll-target="#spacy-tutorial">Spacy Tutorial</a></li>
-  <li><a href="#python-tutorial" id="toc-python-tutorial" class="nav-link" data-scroll-target="#python-tutorial">Python Tutorial</a></li>
+  <li><a href="#lstm-long-short-term-memory" id="toc-lstm-long-short-term-memory" class="nav-link active" data-scroll-target="#lstm-long-short-term-memory">LSTM (Long Short-Term Memory)</a>
+  <ul class="collapse">
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application">Application</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#drawbacks-lstm" id="toc-drawbacks-lstm" class="nav-link" data-scroll-target="#drawbacks-lstm">Drawbacks LSTM</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -217,14 +254,23 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">blogs</h1>
-</div>
+<h1 class="title">LSTM (Long Short-Term Memory)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">LSTM</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 30, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -233,26 +279,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <section id="lstm-long-short-term-memory" class="level2">
-<h2 class="anchored" data-anchor-id="lstm-long-short-term-memory"><a href="nlp/lstm/LSTM.html">LSTM (Long Short-Term Memory)</a></h2>
-<p>In this post we’ll take a look at LSTM (Long Short-Term Memory).</p>
+<h2 class="anchored" data-anchor-id="lstm-long-short-term-memory">LSTM (Long Short-Term Memory)</h2>
+<ul>
+<li>LSTM is a type of RNN architecture that is widely used for sequnce modeling task</li>
+<li>LSTM overcome RNN limitation(vanising gradient) by introducing a memory cell and three gating mechanisms.</li>
+<li>Memory cell in LSTM allows to store and access information over long sequence</li>
+<li>LSTMs use a series of gates which control how the information in a sequence of data comes into, is stored in and leaves the network. they are -
+<ul>
+<li>forgot gate</li>
+<li>input gate</li>
+<li>output gate</li>
+</ul></li>
+</ul>
+<section id="application" class="level3">
+<h3 class="anchored" data-anchor-id="application">Application</h3>
+<ul>
+<li><strong>NLP task</strong>- named entity recognition, sentiment analysis, machine translation etc.</li>
+<li><strong>Speech Recognition</strong> - automatic speech recognition, speech-to-text conversion etc.</li>
+<li><strong>Time Series Analysis and Forecasting</strong> - stock market prediction, weather forecasting etc.</li>
+</ul>
 </section>
-<section id="rnn-recurrent-neural-network" class="level2">
-<h2 class="anchored" data-anchor-id="rnn-recurrent-neural-network"><a href="nlp/rnn/RNN.html">RNN (Recurrent Neural Network)</a></h2>
-<p>In this post we’ll take a look at RNN (Recurrent Neural Network).</p>
+<section id="architecture" class="level3">
+<h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
+<section id="forget-gate-layer" class="level4">
+<h4 class="anchored" data-anchor-id="forget-gate-layer">Forget gate layer</h4>
+<p>First step in the process is Forgot gate. This gate telling the LSTM how much information keep from previous state. Output of this gate is between 0 and 1. Output of this forgot gate multiply with previous LSTM output. <img height="300" width="600" src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png"><br> output of forgot gate is 0 implies <code>-&gt;</code> Forget all previous memory<br> output of forgot gate is 1 implies <code>-&gt;</code> Keep all previous memory<br> output of forgot gate is 0.5 implies <code>-&gt;</code> Keep some of previous memory<br></p>
 </section>
-<section id="logistic-regression" class="level2">
-<h2 class="anchored" data-anchor-id="logistic-regression"><a href="ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html">Logistic Regression</a></h2>
-<p>In this post we’ll take a look at logistic regression and implement using python from scratch</p>
+<section id="input-gate-layer" class="level4">
+<h4 class="anchored" data-anchor-id="input-gate-layer">Input gate layer</h4>
+<p>Goal of this step is how much information take from new memory. This sigmoid layer is call input gate decides which values we’ll update.</p>
+<p>output of forgot gate is 0 implies <code>-&gt;</code> Didn’t take anything from generated memory<br> output of forgot gate is 1 implies <code>-&gt;</code> Take anything from generated memory<br> output of forgot gate is 0.5 implies <code>-&gt;</code> Take partially from generated memory<br> <img height="300" width="600" src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png"></p>
+<p>The new <strong>memory network</strong> is a tanh activated neural network which has learned how to combine the previous hidden state and new input data to generate a ‘new memory update vector’. This vector essentially contains information from the new input data given the context from the previous hidden state</p>
+<p><img height="300" width="600" src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-C.png"></p>
 </section>
-<section id="spacy-tutorial" class="level2">
-<h2 class="anchored" data-anchor-id="spacy-tutorial"><a href="nlp/spacy.html">Spacy Tutorial</a></h2>
-<p>In this article we’ll understand basic feature of spacy.</p>
+<section id="output-gate" class="level4">
+<h4 class="anchored" data-anchor-id="output-gate">Output Gate</h4>
+<p>The output gate, deciding the new hidden state. - First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. - Then, we put the cell state through tanh and multiply it by the output of the sigmoid gate, so that we only output the parts we decided to.</p>
+<p><img height="300" width="600" src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png"></p>
 </section>
-<section id="python-tutorial" class="level2">
-<h2 class="anchored" data-anchor-id="python-tutorial"><a href="python/python_advance.html">Python Tutorial</a></h2>
-<p>In this post we’ll go through Python Interview Questions</p>
+</section>
+<section id="drawbacks-lstm" class="level3">
+<h3 class="anchored" data-anchor-id="drawbacks-lstm">Drawbacks LSTM</h3>
+<ul>
+<li>Computational Complexity</li>
+<li>Training Time</li>
+<li>Difficulty in Hyperparameter Tuning</li>
+</ul>
+</section>
+<section id="reference" class="level3">
+<h3 class="anchored" data-anchor-id="reference">Reference</h3>
+<ul>
+<li>http://colah.github.io/posts/2015-08-Understanding-LSTMs/</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
