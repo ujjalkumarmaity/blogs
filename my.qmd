@@ -4,14 +4,14 @@ title: "IDEA"
 
 
 
-- [ ] LSTM IMPLEMENT SCRATCH
+- [x] LSTM IMPLEMENT SCRATCH
 - [ ] CATEGORY PREDCTION MODEL
 - [ ] KAGGLE COMPITION
 - [ ] COMPLETE RESEARCH READ
 
 
 
-if w is name what is problem in neual netwoerk
+<!-- if w is name what is problem in neual netwoerk
 bagging and boosting
 svm
 problem of vanishing garient
@@ -19,4 +19,4 @@ what if i use sigmoid inside function in nural netwiek
 what if i use sigmoid in out layer
 
 what is bias and variance
-
+ -->
