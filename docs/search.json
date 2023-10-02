@@ -4,14 +4,21 @@
     "href": "index.html",
     "title": "blogs",
     "section": "",
-    "text": "In this post we’ll take a look at LSTM (Long Short-Term Memory)."
+    "text": "In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python."
+  },
+  {
+    "objectID": "index.html#lpaper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
+    "href": "index.html#lpaper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
+    "title": "blogs",
+    "section": "",
+    "text": "In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python."
   },
   {
     "objectID": "index.html#lstm-long-short-term-memory",
     "href": "index.html#lstm-long-short-term-memory",
     "title": "blogs",
-    "section": "",
-    "text": "In this post we’ll take a look at LSTM (Long Short-Term Memory)."
+    "section": "LSTM (Long Short-Term Memory)",
+    "text": "LSTM (Long Short-Term Memory)\nIn this post we’ll take a look at LSTM (Long Short-Term Memory)."
   },
   {
     "objectID": "index.html#rnn-recurrent-neural-network",
@@ -68,6 +75,13 @@
     "title": "Logistic Regression",
     "section": "Logistic Regression",
     "text": "Logistic Regression\nLogistic regression is a statistical algorithm used for binary classification.Logistic regression is a type of supervised learning\nGiven an input feature vector x , Here we want to recognize this feature vector belongs to class 0 ot class 1\n\\(\\hat{y}\\)= \\(p(y=1|x)\\) , here \\(0&lt;=\\hat{y} &lt;=1\\)\nHere \\(x\\) is feature vector. parameter - \\(w\\)  If assuming a linear relationship between the input features and target variable. then \\(\\hat{y} = x*w^T\\)  \\(xw^T\\) can be much bigger then 1 or can be negative. but here we want predicted output should be between -0 and 1.\nIn Logistic Regression we use sigmiod function \\(\\hat{y} = \\sigma(x*w^T)\\)\n\n\\(\\sigma(x) = {1\\over(1+e^{-x})}\\) if \\(x\\) is very large then \\(e^{-x}\\) close to 0, \\(\\sigma(x) = 1\\)  if \\(x\\) is very small then \\(e^{-x}\\) is huge number, \\(\\sigma(x) = 0\\) \n\nLoss function\nIn logistic regression loss function $L(y,) = (1/2)*(y-)^2 $ not work well. we use following loss function \\[L(y,\\hat{y}) = - y log(\\hat{y}) - (1-y) log(1 - \\hat{y})\n\\] if \\(y=1\\) then \\(L(y,\\hat{y}) = - y log(\\hat{y})\\) &lt;- that means we want \\(y log(\\hat{y})\\) as large as possible, &lt;- that means \\(\\hat{y}\\) will be large. So if y = 1 , then we want \\(\\hat{y}\\) as biggest as possible. if \\(y=0\\) then \\(L(y,\\hat{y}) = - (1-y) log(1-\\hat{y})\\) &lt;- that means we want \\(log(1-\\hat{y})\\) large, &lt;- that means \\(\\hat{y}\\) will be small.\n\n\ncost function\n\\[J(W) =(1/m) \\sum L(y,\\hat{y})\n\\]\n\n# This Python 3 environment comes with many helpful analytics libraries installed\n# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python\n# For example, here's several helpful packages to load\n\nimport numpy as np # linear algebra\nimport pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)\n\n# Input data files are available in the read-only \"../input/\" directory\n# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory\n\nimport os\nfor dirname, _, filenames in os.walk('/kaggle/input'):\n    for filename in filenames:\n        print(os.path.join(dirname, filename))\n\n# You can write up to 5GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using \"Save & Run All\" \n# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session\n/kaggle/input/logistic-regression/Social_Network_Ads.csv\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler,LabelEncoder,MinMaxScaler\nimport seaborn as sns\nfrom sklearn.decomposition import PCA\ndf=pd.read_csv('/kaggle/input/logistic-regression/Social_Network_Ads.csv')\ndf.head()\n\n\n\n\n\n\n\n\n\nUser ID\n\n\nGender\n\n\nAge\n\n\nEstimatedSalary\n\n\nPurchased\n\n\n\n\n\n\n0\n\n\n15624510\n\n\nMale\n\n\n19\n\n\n19000\n\n\n0\n\n\n\n\n1\n\n\n15810944\n\n\nMale\n\n\n35\n\n\n20000\n\n\n0\n\n\n\n\n2\n\n\n15668575\n\n\nFemale\n\n\n26\n\n\n43000\n\n\n0\n\n\n\n\n3\n\n\n15603246\n\n\nFemale\n\n\n27\n\n\n57000\n\n\n0\n\n\n\n\n4\n\n\n15804002\n\n\nMale\n\n\n19\n\n\n76000\n\n\n0"
+  },
+  {
+    "objectID": "my.html",
+    "href": "my.html",
+    "title": "CHECK LIST",
+    "section": "",
+    "text": "15-07-2023 TO 27-07-2023\n\nLSTM IMPLEMENT SCRATCH\nCATEGORY PREDCTION MODEL\n\naccuracy 60 % in 5 epoch,\n\nKAGGLE COMPITION\nazure ml\nCOMPLETE RESEARCH READ AND IMPLEMENTATION\n\nhttps://ieeexplore.ieee.org/document/8530883\n\n\n27-07-2023 TO 10-08-2023\n\nMLOps\n\nCI/CD Pipeline\n\nGithub Action\njenkins\n\nCloud and Devops\n\nDocker\nkubernet\nazure\n\n\n\nlatent semantic analysis"
   },
   {
     "objectID": "nlp/lstm/LSTM.html",
@@ -168,10 +182,10 @@
     "text": "Inheritance\nInheritance allows us to define a class that inherits all the methods and properties from another class.\nParent class is the class being inherited from, also called base class.\nChild class is the class that inherits from another class, also called derived class.\nWhen you add the __init__() function, the child class will no longer inherit the parent’s __init__() function.\nclass Student(Person):\n  def __init__(self, fname, lname):\nTo keep the inheritance of the parent’s __init__() function, add a call to the parent’s __init__() function:\nclass Student(Person):\n  def __init__(self, fname, lname):\n    Person.__init__(self, fname, lname)\nsuper() function that will make the child class inherit all the methods and properties from its parent\nclass Student(Person):\n  def __init__(self, fname, lname):\n    super().__init__(fname, lname)\nclass Person:\n    def __init__(self, fname, lname):\n        self.firstname = fname\n        self.lastname = lname\n\n    def printname(self):\n        print(self.firstname, self.lastname)\n\nclass Student(Person):\n    def __init__(self, fname, lname, year):\n        super().__init__(fname, lname)\n        self.graduationyear = year\n\n    def printstd(self):\n        print(\"Welcome\", self.firstname, self.lastname, \"to the class of\", self.graduationyear)\n\nx = Student(\"Mike\", \"Olsen\", 2023)\nx.printstd()\nWelcome Mike Olsen to the class of 2023"
   },
   {
-    "objectID": "my.html",
-    "href": "my.html",
-    "title": "IDEA",
+    "objectID": "index.html#paper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
+    "href": "index.html#paper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
+    "title": "blogs",
     "section": "",
-    "text": "LSTM IMPLEMENT SCRATCH\nCATEGORY PREDCTION MODEL\nKAGGLE COMPITION\nCOMPLETE RESEARCH READ"
+    "text": "In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python."
   }
 ]

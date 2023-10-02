@@ -1,6 +1,8 @@
 ---
 title: "blogs"
 ---
+## [Paper Implementation — Learning Text Similarity with Siamese Recurrent Networks](https://medium.com/@ujjalkumarmaity1998/paper-implementation-learning-text-similarity-with-siamese-recurrent-networks-4175683d5ce6)
+In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python.
 
 ## [LSTM (Long Short-Term Memory)](nlp/lstm/LSTM.html)
 In this post we’ll take a look at LSTM (Long Short-Term Memory).
