@@ -30,37 +30,37 @@ website:
       - text: "About Me"
         file: about.qmd
 
-  sidebar:
-    style: "docked"
-    search: true
-    collapse-level: 0
-    contents:
-      # - section: "Research-Paper-Implementation"
-      #   contents:
-      #     - index.qmd
-      - section: "ML"
-        contents:
-          - ml/logistic-regression-from-scratch/logistic-regression-from-scratch.qmd
+  # sidebar:
+  #   style: "docked"
+  #   search: true
+  #   collapse-level: 0
+  #   contents:
+  #     # - section: "Research-Paper-Implementation"
+  #     #   contents:
+  #     #     - index.qmd
+  #     - section: "ML"
+  #       contents:
+  #         - ml/logistic-regression-from-scratch/logistic-regression-from-scratch.qmd
 
 
 
 
-      - section: "NLP"
-        contents:
-          - nlp/rnn/RNN.qmd
-          - section: "Resume Parsing"
-            contents:
-              - nlp/spacy.qmd       
-          - nlp/spacy.qmd                       
-      - section: "Python"
-        contents:
-          - python/python_advance.qmd
-      # - section: "SQL"
-      #   contents:
-      #     - python/about1.qmd
-      # - section: "MongoSB"
-      #   contents:
-      #     - python/about1.qmd
+  #     - section: "NLP"
+  #       contents:
+  #         - nlp/rnn/RNN.qmd
+  #         - section: "Resume Parsing"
+  #           contents:
+  #             - nlp/spacy.qmd       
+  #         - nlp/spacy.qmd                       
+  #     - section: "Python"
+  #       contents:
+  #         - python/python_advance.qmd
+  #     # - section: "SQL"
+  #     #   contents:
+  #     #     - python/about1.qmd
+  #     # - section: "MongoSB"
+  #     #   contents:
+  #     #     - python/about1.qmd
 
   page-footer: 
     # left: "Copyright 2021, ujjal" 
