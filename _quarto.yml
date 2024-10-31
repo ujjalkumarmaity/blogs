@@ -92,3 +92,8 @@ format:
 #   - code
 #   - analysis
 # ---
+
+
+# Steps to deploy
+# run - quarto preview
+# then commit and push
