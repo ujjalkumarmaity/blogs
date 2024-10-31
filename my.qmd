@@ -1,16 +1,33 @@
 ---
-title: "IDEA"
+title: "CHECK LIST"
 ---
 
 
+15-07-2023 TO  27-07-2023
 
-- [x] LSTM IMPLEMENT SCRATCH
-- [ ] CATEGORY PREDCTION MODEL
+- [ ] LSTM IMPLEMENT SCRATCH
+- [x] CATEGORY PREDCTION MODEL
+    - accuracy 60 % in 5 epoch, 
 - [ ] KAGGLE COMPITION
-- [ ] COMPLETE RESEARCH READ
+- [ ] azure ml
+- [ ] COMPLETE RESEARCH READ AND IMPLEMENTATION
+    - https://ieeexplore.ieee.org/document/8530883
 
 
 
+27-07-2023 TO  10-08-2023
+
+- [ ] MLOps
+    - CI/CD Pipeline
+        - Github Action
+        - jenkins
+    - Cloud and Devops
+        - Docker
+        - kubernet
+        - azure
+
+
+latent semantic analysis
 <!-- if w is name what is problem in neual netwoerk
 bagging and boosting
 svm
@@ -19,4 +36,7 @@ what if i use sigmoid inside function in nural netwiek
 what if i use sigmoid in out layer
 
 what is bias and variance
+
+
+in neural network try different weight and activation function
  -->
