@@ -1,23 +1,7 @@
 project:
   type: website
   output-dir: docs
-# website:
-#   back-to-top-navigation: true
-#   title: "blogs"
-#   # navbar:
-#   #   left:
-#   #     - href: index.qmd
-#   #       text: Home
-#   #     - about.qmd
-#   sidebar:
-#     style : "docked"
-#     search : true
-#     contents :
-#       - section: "sastai"
-#         contents:
-#           - herf: ml/2021-12-28-logistic-regression-from-scratch.ipnyb
-#           - herf: ml/2022-12-28-Mean-Median-Imputation.ipnyb
-#       - section: "fastai"
+
 website:
   title: "ujjal"
   navbar:
@@ -31,40 +15,12 @@ website:
         file: about.qmd
 
 
-  # sidebar:
-  #   style: "docked"
-  #   search: true
-  #   collapse-level: 0
-  #   contents:
-  #     # - section: "Research-Paper-Implementation"
-  #     #   contents:
-  #     #     - index.qmd
-  #     - section: "ML"
-  #       contents:
-  #         - ml/logistic-regression-from-scratch/logistic-regression-from-scratch.qmd
 
 
 
-
-  #     - section: "NLP"
-  #       contents:
-  #         - nlp/rnn/RNN.qmd
-  #         - section: "Resume Parsing"
-  #           contents:
-  #             - nlp/spacy.qmd       
-  #         - nlp/spacy.qmd                       
-  #     - section: "Python"
-  #       contents:
-  #         - python/python_advance.qmd
-  #     # - section: "SQL"
-  #     #   contents:
-  #     #     - python/about1.qmd
-  #     # - section: "MongoSB"
-  #     #   contents:
-  #     #     - python/about1.qmd
-
+ 
   page-footer: 
-    # left: "Copyright 2021, ujjal" 
+    left: "Copyright 2025, ujjal" 
     right: 
       - icon: github
         href: https://github.com/ujjalkumarmaity/
@@ -77,10 +33,17 @@ website:
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
-    sidebar: false
+    theme: 
+      light: flatly
+      dark: darkly
+    toc: false
+    page-layout: article # removes sidebar
+
+  # html:
+  #   theme: cosmo
+  #   css: styles.css
+  #   toc: true
+  #   sidebar: false
 
 
 # ---
