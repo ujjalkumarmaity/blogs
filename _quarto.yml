@@ -30,6 +30,7 @@ website:
       - text: "About Me"
         file: about.qmd
 
+
   # sidebar:
   #   style: "docked"
   #   search: true
