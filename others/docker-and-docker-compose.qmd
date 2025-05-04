@@ -1,0 +1,175 @@
+---
+title: "All About Docker and Docker compose"
+description: "Into to Docker and Docker compose"
+author: "ujjal"
+date: "5/4/2025"
+categories:
+  - docker
+  - docker-compose
+---
+### What is Docker?
+
+Docker is platform, where we can developing, shipping and running application.
+
+A **Docker Container** is standalone, lightweight and executable package that contain everything needed to run an application.  
+
+### How Docker Works?
+
+1. First we create `Dockerfile` 
+
+```bash
+FROM python:3.8-slim
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . /opt/ml/code/
+COPY src/serve /usr/local/bin/serve
+
+# Set permissions for the serve script
+RUN chmod +x /usr/local/bin/serve
+
+# Set the working directory
+WORKDIR /opt/ml/code
+
+# Expose the port FastAPI will run on
+EXPOSE 8080
+
+# Start the FastAPI server using the serve script
+ENTRYPOINT ["/usr/local/bin/serve"]
+```
+
+1. build a container image using `docker buildx build -t myapp:latest .` command. Here `.` (dot) means current directory.
+2. Run docker container 
+    
+    `docker run myapp`
+    
+3. push docker image to docker hub or AWS ECR(Elastic Container Registry). Here i will push docker image into AWS ECR.  
+    1. First authenticate docker client with aws erc registry.`aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>[.dkr.ecr.us-east-2.amazonaws.com](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/)` 
+    2. tag image - `docker tag myapp:latest <account-id>[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)`
+    3. push image - `docker push <account-id>[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)`
+
+Here one question came to your mind why docker image push to container registry 
+
+### Docker Command that I used frequently
+
+**Docker Basic**
+
+```bash
+# list of docker image
+docker images
+
+# list of running images
+docker ps
+
+# list of all image, including staus(last exited time)
+docker ps -a
+
+# build a image (Here .(dot) means currnt directory). here -t is tag. it assign name and version
+docker buildx build -t myapp:latest .
+
+# run docker image
+docker run myapp:latest
+
+# attatch shell
+docker exec -it 5974bbd6498d bash
+```
+
+**Docker Run Command**
+
+syntax of docker run command 
+
+            `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
+
+- `OPTIONS`flag configure setting of container
+- `IMAGE` is name of docker image
+- `COMMAND` is run command when container is started
+- `ARG` - Argument pass to command
+
+**Here Some most frequently options** 
+
+- `-d, --detach` run container in background
+- `-i, -it, --interactive` run container in interactive mode(Allocate interactive terminal)
+- `--name` assign name to container
+- `-p, --publish <host_port>:<container_port>`
+
+```bash
+docker run -d --name my-ml-webapp -p 8080:80 -e ENV=production myapp:latest
+```
+
+### What is Docker Compose?
+
+Docker compose is a tools is used for define and managed multi-container application. It use `docker-compose.yaml` file to describe the service, network and volume 
+
+we use docker compose where multiple services(like frontend, backend, database) running i n same machine. In one of my project i use docker compose, where using docker compose i mange redis, postgres, Fastapi backend server, and react frontend server. 
+
+Main application of docker compose is such application where multiple container dependent with other. Like backend server dependent on redis and postgres container. By using `docker compose up` command we start entire application, instead of running all container on by one.
+
+sample `docker-compose.yaml` file - 
+
+```bash
+version: "1.0.0"
+
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: fastapi-backend-server
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=dev
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+```
+
+Some Docker Compose command 
+
+```bash
+# start all services define docker-compose.yaml file
+docker compose up
+# stop and remove container, volumn and network
+docker compose down
+# restart all service
+docker compose restart
+# stop all service
+docker compose stop
+# build image and start services
+docker compose up --build
+```
+
+### References
+
+- [https://docs.docker.com/get-started/docker-overview/](https://docs.docker.com/get-started/docker-overview/)
+- [https://www.docker.com/resources/what-container](https://www.docker.com/resources/what-container)
+- [https://spacelift.io/blog/docker-compose](https://spacelift.io/blog/docker-compose)

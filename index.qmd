@@ -1,23 +1,33 @@
----
-title: "blogs"
----
-## [Fine-Tuning Sentence Transformer Models: A Case Study](https://medium.com/@ujjalkumarmaity1998/fine-tuning-sentence-transformer-models-a-case-study-148e32f09bd5)
-In this blog first we go through **TSDAE (Transformers and Sequential Denoising Auto-Encoder )** and GPL **(Generative Pseudo Labeling)** paper and then implement this paper using python.
+<!-- ---
+title: "Start Here"
+--- -->
 
-## [Paper Implementation — Learning Text Similarity with Siamese Recurrent Networks](https://medium.com/@ujjalkumarmaity1998/paper-implementation-learning-text-similarity-with-siamese-recurrent-networks-4175683d5ce6)
-In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python.
+<h3> Transformers </h3>
+- [Fine-Tuning Sentence Transformer Models: A Case Study](https://medium.com/@ujjalkumarmaity1998/fine-tuning-sentence-transformer-models-a-case-study-148e32f09bd5)
+<!-- In this blog first we go through **TSDAE (Transformers and Sequential Denoising Auto-Encoder )** and GPL **(Generative Pseudo Labeling)** paper and then implement this paper using python. -->
+- [Fine-Tuning Sentence Transformer Models: A Case Study](https://medium.com/@ujjalkumarmaity1998/fine-tuning-sentence-transformer-models-a-case-study-148e32f09bd5)
+<!-- In this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python. -->
 
-## [LSTM (Long Short-Term Memory)](nlp/lstm/LSTM.html)
-In this post we’ll take a look at LSTM (Long Short-Term Memory).
 
-## [RNN (Recurrent Neural Network)](nlp/rnn/RNN.html)
-In this post we’ll take a look at RNN (Recurrent Neural Network).
+<h3> Deep Learning </h3>
+- [LSTM (Long Short-Term Memory)](nlp/lstm/LSTM.html)
+- [RNN (Recurrent Neural Network)](nlp/rnn/RNN.html)
+<!-- In this post we’ll take a look at LSTM (Long Short-Term Memory).
+In this post we’ll take a look at RNN (Recurrent Neural Network). -->
 
-## [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
-In this post we’ll take a look at logistic regression and implement using python from scratch
+<h3> Clasical ML </h3>
+- [Logistic Regression](ml/logistic-regression-from-scratch/logistic-regression-from-scratch.html)
 
-## [Spacy Tutorial ](nlp/spacy.html)
+<!-- In this post we’ll take a look at logistic regression and implement using python from scratch -->
+
+
+<h3> Python </h3>
+- [Python Tutorial Part 1](python/python_advance.html)
+<!-- In this post we'll go through Python Interview Questions -->
+
+<h3> Other Topic </h3>
+- [Into to Docker and docker compose](others/docker-and-docker-compose.qmd)
+- [Spacy Tutorial ](nlp/spacy.html)
+<!-- 
 In this article we’ll understand basic feature of spacy.
-
-## [Python Tutorial ](python/python_advance.html)
-In this post we'll go through Python Interview Questions
+ -->

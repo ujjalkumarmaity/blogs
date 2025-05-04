@@ -2,23 +2,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "blogs",
+    "title": "ujjal",
     "section": "",
-    "text": "In this blog first we go through TSDAE (Transformers and Sequential Denoising Auto-Encoder ) and GPL (Generative Pseudo Labeling) paper and then implement this paper using python."
+    "text": "Transformers\n\n\nFine-Tuning Sentence Transformer Models: A Case Study \nFine-Tuning Sentence Transformer Models: A Case Study \n\n\nDeep Learning\n\n\nLSTM (Long Short-Term Memory)\nRNN (Recurrent Neural Network) \n\n\nClasical ML\n\n\nLogistic Regression\n\n\n\nPython\n\n\nPython Tutorial Part 1 \n\n\nOther Topic\n\n\nInto to Docker and docker compose\nSpacy Tutorial"
   },
   {
     "objectID": "index.html#fine-tuning-sentence-transformer-models-a-case-study",
     "href": "index.html#fine-tuning-sentence-transformer-models-a-case-study",
-    "title": "blogs",
+    "title": "Sta",
     "section": "",
     "text": "In this blog first we go through TSDAE (Transformers and Sequential Denoising Auto-Encoder ) and GPL (Generative Pseudo Labeling) paper and then implement this paper using python."
   },
   {
     "objectID": "index.html#paper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
     "href": "index.html#paper-implementation-learning-text-similarity-with-siamese-recurrent-networks",
-    "title": "blogs",
-    "section": "Paper Implementation — Learning Text Similarity with Siamese Recurrent Networks",
-    "text": "Paper Implementation — Learning Text Similarity with Siamese Recurrent Networks\nIn this blog first we go through Learning Text Similarity with Siamese Recurrent Networks paper and then implement this paper using python."
+    "title": "Start Here",
+    "section": "",
+    "text": "Fine-Tuning Sentence Transformer Models: A Case Study \nFine-Tuning Sentence Transformer Models: A Case Study \n\n\n\nLSTM (Long Short-Term Memory)\nRNN (Recurrent Neural Network) \n\n\n\nLogistic Regression\n\n\n\n\nPython Tutorial Part 1"
   },
   {
     "objectID": "index.html#lstm-long-short-term-memory",
@@ -32,21 +32,21 @@
     "href": "index.html#rnn-recurrent-neural-network",
     "title": "blogs",
     "section": "RNN (Recurrent Neural Network)",
-    "text": "RNN (Recurrent Neural Network)\nIn this post we’ll take a look at RNN (Recurrent Neural Network)."
+    "text": "RNN (Recurrent Neural Network)\nIn this post we’ll take a look at RNN (Recurrent Neural Network).\n\nClasical ML\n\n\nLogistic Regression\n\n\n\nPython\n\n\nPython Tutorial Part 1"
   },
   {
     "objectID": "index.html#logistic-regression",
     "href": "index.html#logistic-regression",
     "title": "blogs",
     "section": "Logistic Regression",
-    "text": "Logistic Regression\nIn this post we’ll take a look at logistic regression and implement using python from scratch"
+    "text": "Logistic Regression\nIn this post we’ll take a look at logistic regression and implement using python from scratch\n\nPython\n\n\nPython Tutorial Part 1"
   },
   {
     "objectID": "index.html#spacy-tutorial",
     "href": "index.html#spacy-tutorial",
     "title": "blogs",
     "section": "Spacy Tutorial",
-    "text": "Spacy Tutorial\nIn this article we’ll understand basic feature of spacy."
+    "text": "Spacy Tutorial\nIn this article we’ll understand basic feature of spacy.\n\nPython\n\n\nPython Tutorial Part 1"
   },
   {
     "objectID": "index.html#python-tutorial",
@@ -187,5 +187,33 @@
     "title": "Python Advance",
     "section": "Inheritance",
     "text": "Inheritance\nInheritance allows us to define a class that inherits all the methods and properties from another class.\nParent class is the class being inherited from, also called base class.\nChild class is the class that inherits from another class, also called derived class.\nWhen you add the __init__() function, the child class will no longer inherit the parent’s __init__() function.\nclass Student(Person):\n  def __init__(self, fname, lname):\nTo keep the inheritance of the parent’s __init__() function, add a call to the parent’s __init__() function:\nclass Student(Person):\n  def __init__(self, fname, lname):\n    Person.__init__(self, fname, lname)\nsuper() function that will make the child class inherit all the methods and properties from its parent\nclass Student(Person):\n  def __init__(self, fname, lname):\n    super().__init__(fname, lname)\nclass Person:\n    def __init__(self, fname, lname):\n        self.firstname = fname\n        self.lastname = lname\n\n    def printname(self):\n        print(self.firstname, self.lastname)\n\nclass Student(Person):\n    def __init__(self, fname, lname, year):\n        super().__init__(fname, lname)\n        self.graduationyear = year\n\n    def printstd(self):\n        print(\"Welcome\", self.firstname, self.lastname, \"to the class of\", self.graduationyear)\n\nx = Student(\"Mike\", \"Olsen\", 2023)\nx.printstd()\nWelcome Mike Olsen to the class of 2023"
+  },
+  {
+    "objectID": "index.html#other-topic",
+    "href": "index.html#other-topic",
+    "title": "Start Here",
+    "section": "Other Topic",
+    "text": "Other Topic\n\nOther Topic\n\n\nInto to Docker and docker compose\nSpacy Tutorial"
+  },
+  {
+    "objectID": "others/docker-and-docker-compose.html",
+    "href": "others/docker-and-docker-compose.html",
+    "title": "All About Docker and Docker compose",
+    "section": "",
+    "text": "What is Docker?\nDocker is platform, where we can developing, shipping and running application.\nA Docker Container is standalone, lightweight and executable package that contain everything needed to run an application.\n\n\nHow Docker Works?\n\nFirst we create Dockerfile\n\nFROM python:3.8-slim\n\nCOPY requirements.txt .\n\nRUN pip install -r requirements.txt\n\nCOPY . /opt/ml/code/\nCOPY src/serve /usr/local/bin/serve\n\n# Set permissions for the serve script\nRUN chmod +x /usr/local/bin/serve\n\n# Set the working directory\nWORKDIR /opt/ml/code\n\n# Expose the port FastAPI will run on\nEXPOSE 8080\n\n# Start the FastAPI server using the serve script\nENTRYPOINT [\"/usr/local/bin/serve\"]\n\nbuild a container image using docker buildx build -t myapp:latest . command. Here . (dot) means current directory.\nRun docker container\ndocker run myapp\npush docker image to docker hub or AWS ECR(Elastic Container Registry). Here i will push docker image into AWS ECR.\n\nFirst authenticate docker client with aws erc registry.aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/)\ntag image - docker tag myapp:latest &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)\npush image - docker push &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)\n\n\nHere one question came to your mind why docker image push to container registry\n\n\nDocker Command that I used frequently\nDocker Basic\n# list of docker image\ndocker images\n\n# list of running images\ndocker ps\n\n# list of all image, including staus(last exited time)\ndocker ps -a\n\n# build a image (Here .(dot) means currnt directory). here -t is tag. it assign name and version\ndocker buildx build -t myapp:latest .\n\n# run docker image\ndocker run myapp:latest\n\n# attatch shell\ndocker exec -it 5974bbd6498d bash\nDocker Run Command\nsyntax of docker run command\n        `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`\n\nOPTIONSflag configure setting of container\nIMAGE is name of docker image\nCOMMAND is run command when container is started\nARG - Argument pass to command\n\nHere Some most frequently options\n\n-d, --detach run container in background\n-i, -it, --interactive run container in interactive mode(Allocate interactive terminal)\n--name assign name to container\n-p, --publish &lt;host_port&gt;:&lt;container_port&gt;\n\ndocker run -d --name my-ml-webapp -p 8080:80 -e ENV=production myapp:latest\n\n\nWhat is Docker Compose?\nDocker compose is a tools is used for define and managed multi-container application. It use docker-compose.yaml file to describe the service, network and volume\nwe use docker compose where multiple services(like frontend, backend, database) running i n same machine. In one of my project i use docker compose, where using docker compose i mange redis, postgres, Fastapi backend server, and react frontend server.\nMain application of docker compose is such application where multiple container dependent with other. Like backend server dependent on redis and postgres container. By using docker compose up command we start entire application, instead of running all container on by one.\nsample docker-compose.yaml file -\nversion: \"1.0.0\"\n\nservices:\n  redis:\n    image: redis:7\n    ports:\n      - \"6379:6379\"\n\n  postgres:\n    image: postgres:15\n    environment:\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: password\n      POSTGRES_DB: mydb\n    ports:\n      - \"5432:5432\"\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n\n  backend:\n    build:\n      context: ./backend\n    container_name: fastapi-backend-server\n    depends_on:\n      - postgres\n      - redis\n    ports:\n      - \"8000:8000\"\n    environment:\n      - ENV=dev\n\n  frontend:\n    build:\n      context: ./frontend\n    container_name: frontend\n    ports:\n      - \"80:80\"\n    depends_on:\n      - backend\n\nvolumes:\n  pgdata:\nSome Docker Compose command\n# start all services define docker-compose.yaml file\ndocker compose up\n# stop and remove container, volumn and network\ndocker compose down\n# restart all service\ndocker compose restart\n# stop all service\ndocker compose stop\n# build image and start services\ndocker compose up --build\n\n\nReferences\n\nhttps://docs.docker.com/get-started/docker-overview/\nhttps://www.docker.com/resources/what-container\nhttps://spacelift.io/blog/docker-compose"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Sta",
+    "section": "",
+    "text": "In this blog first we go through TSDAE (Transformers and Sequential Denoising Auto-Encoder ) and GPL (Generative Pseudo Labeling) paper and then implement this paper using python."
+  },
+  {
+    "objectID": "others/docker-and-docker-compose1.html",
+    "href": "others/docker-and-docker-compose1.html",
+    "title": "All About Docker and Docker compose",
+    "section": "",
+    "text": "What is Docker?\nDocker is platform, where we can developing, shipping and running application.\nA Docker Container is standalone, lightweight and executable package that contain everything needed to run an application.\n\n\nHow Docker Works?\n\nFirst we create Dockerfile\n\nFROM python:3.8-slim\n\nCOPY requirements.txt .\n\nRUN pip install -r requirements.txt\n\nCOPY . /opt/ml/code/\nCOPY src/serve /usr/local/bin/serve\n\n# Set permissions for the serve script\nRUN chmod +x /usr/local/bin/serve\n\n# Set the working directory\nWORKDIR /opt/ml/code\n\n# Expose the port FastAPI will run on\nEXPOSE 8080\n\n# Start the FastAPI server using the serve script\nENTRYPOINT [\"/usr/local/bin/serve\"]\n\nbuild a container image using docker buildx build -t myapp:latest . command. Here . (dot) means current directory.\nRun docker container\ndocker run myapp\npush docker image to docker hub or AWS ECR(Elastic Container Registry). Here i will push docker image into AWS ECR.\n\nFirst authenticate docker client with aws erc registry.aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/)\ntag image - docker tag myapp:latest &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)\npush image - docker push &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)\n\n\nHere one question came to your mind why docker image push to container registry\n\n\nDocker Command that I used frequently\nDocker Basic\n# list of docker image\ndocker images\n\n# list of running images\ndocker ps\n\n# list of all image, including staus(last exited time)\ndocker ps -a\n\n# build a image (Here .(dot) means currnt directory). here -t is tag. it assign name and version\ndocker buildx build -t myapp:latest .\n\n# run docker image\ndocker run myapp:latest\n\n# attatch shell\ndocker exec -it 5974bbd6498d bash\nDocker Run Command\nsyntax of docker run command\n        `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`\n\nOPTIONSflag configure setting of container\nIMAGE is name of docker image\nCOMMAND is run command when container is started\nARG - Argument pass to command\n\nHere Some most frequently options\n\n-d, --detach run container in background\n-i, -it, --interactive run container in interactive mode(Allocate interactive terminal)\n--name assign name to container\n-p, --publish &lt;host_port&gt;:&lt;container_port&gt;\n\ndocker run -d --name my-ml-webapp -p 8080:80 -e ENV=production myapp:latest\n\n\nWhat is Docker Compose?\nIntroduction to Docker | Google Cloud Skills Boost\n\n\nReferences\n\nhttps://docs.docker.com/get-started/docker-overview/\nhttps://www.docker.com/resources/what-container\nhttps://spacelift.io/blog/docker-compose"
   }
 ]

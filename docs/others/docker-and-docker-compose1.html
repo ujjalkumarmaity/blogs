@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="ujjal">
+<meta name="dcterms.date" content="2025-05-04">
+<meta name="description" content="Into to Docker and Docker compose">
 
-<title>ujjal - CHECK LIST</title>
+<title>ujjal - All About Docker and Docker compose</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">ujjal</span>
     </a>
   </div>
@@ -83,11 +120,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Start Here</span></a>
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">About Me</span></a>
   </li>  
 </ul>
@@ -108,14 +145,34 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CHECK LIST</h1>
-</div>
+<h1 class="title">All About Docker and Docker compose</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">others</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Into to Docker and Docker compose
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>ujjal </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 4, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -123,51 +180,101 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>15-07-2023 TO 27-07-2023</p>
-<ul class="task-list">
-<li><input type="checkbox">LSTM IMPLEMENT SCRATCH</li>
-<li><input type="checkbox" checked="">CATEGORY PREDCTION MODEL
+<section id="what-is-docker" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-docker">What is Docker?</h3>
+<p>Docker is platform, where we can developing, shipping and running application.</p>
+<p>A <strong>Docker Container</strong> is standalone, lightweight and executable package that contain everything needed to run an application.</p>
+</section>
+<section id="how-docker-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-docker-works">How Docker Works?</h3>
+<ol type="1">
+<li>First we create <code>Dockerfile</code></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> requirements.txt .</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> pip install <span class="at">-r</span> requirements.txt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> . /opt/ml/code/</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> src/serve /usr/local/bin/serve</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set permissions for the serve script</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> chmod +x /usr/local/bin/serve</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the working directory</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">WORKDIR</span> /opt/ml/code</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Expose the port FastAPI will run on</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">EXPOSE</span> 8080</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the FastAPI server using the serve script</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">ENTRYPOINT</span> <span class="pp">[</span><span class="st">"/usr/local/bin/serve"</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><p>build a container image using <code>docker buildx build -t myapp:latest .</code> command. Here <code>.</code> (dot) means current directory.</p></li>
+<li><p>Run docker container</p>
+<p><code>docker run myapp</code></p></li>
+<li><p>push docker image to docker hub or AWS ECR(Elastic Container Registry). Here i will push docker image into AWS ECR.</p>
+<ol type="1">
+<li>First authenticate docker client with aws erc registry.<code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/)</code></li>
+<li>tag image - <code>docker tag myapp:latest &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)</code></li>
+<li>push image - <code>docker push &lt;account-id&gt;[.dkr.ecr.us-east-2.amazonaws.com/myapp:latest](http://590183925485.dkr.ecr.us-east-1.amazonaws.com/resume-segmentation-model:latest)</code></li>
+</ol></li>
+</ol>
+<p>Here one question came to your mind why docker image push to container registry</p>
+</section>
+<section id="docker-command-that-i-used-frequently" class="level3">
+<h3 class="anchored" data-anchor-id="docker-command-that-i-used-frequently">Docker Command that I used frequently</h3>
+<p><strong>Docker Basic</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list of docker image</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> images</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list of running images</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># list of all image, including staus(last exited time)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps <span class="at">-a</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># build a image (Here .(dot) means currnt directory). here -t is tag. it assign name and version</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> buildx build <span class="at">-t</span> myapp:latest .</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># run docker image</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run myapp:latest</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># attatch shell</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> 5974bbd6498d bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Docker Run Command</strong></p>
+<p>syntax of docker run command</p>
+<pre><code>        `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`</code></pre>
 <ul>
-<li>accuracy 60 % in 5 epoch,</li>
-</ul></li>
-<li><input type="checkbox">KAGGLE COMPITION</li>
-<li><input type="checkbox">azure ml</li>
-<li><input type="checkbox">COMPLETE RESEARCH READ AND IMPLEMENTATION
-<ul>
-<li>https://ieeexplore.ieee.org/document/8530883</li>
-</ul></li>
+<li><code>OPTIONS</code>flag configure setting of container</li>
+<li><code>IMAGE</code> is name of docker image</li>
+<li><code>COMMAND</code> is run command when container is started</li>
+<li><code>ARG</code> - Argument pass to command</li>
 </ul>
-<p>27-07-2023 TO 10-08-2023</p>
-<ul class="task-list">
-<li><input type="checkbox">MLOps
+<p><strong>Here Some most frequently options</strong></p>
 <ul>
-<li>CI/CD Pipeline
-<ul>
-<li>Github Action</li>
-<li>jenkins</li>
-</ul></li>
-<li>Cloud and Devops
-<ul>
-<li>Docker</li>
-<li>kubernet</li>
-<li>azure</li>
-</ul></li>
-</ul></li>
+<li><code>-d, --detach</code> run container in background</li>
+<li><code>-i, -it, --interactive</code> run container in interactive mode(Allocate interactive terminal)</li>
+<li><code>--name</code> assign name to container</li>
+<li><code>-p, --publish &lt;host_port&gt;:&lt;container_port&gt;</code></li>
 </ul>
-<p>latent semantic analysis <!-- if w is name what is problem in neual netwoerk
-bagging and boosting
-svm
-problem of vanishing garient
-what if i use sigmoid inside function in nural netwiek
-what if i use sigmoid in out layer
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> my-ml-webapp <span class="at">-p</span> 8080:80 <span class="at">-e</span> ENV=production myapp:latest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="what-is-docker-compose" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-docker-compose">What is Docker Compose?</h3>
+<p><a href="https://www.cloudskillsboost.google/focuses/1029?parent=catalog">Introduction to Docker | Google Cloud Skills Boost</a></p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li><a href="https://docs.docker.com/get-started/docker-overview/">https://docs.docker.com/get-started/docker-overview/</a></li>
+<li><a href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></li>
+<li><a href="https://spacelift.io/blog/docker-compose">https://spacelift.io/blog/docker-compose</a></li>
+</ul>
 
-what is bias and variance
 
-
-in neural network try different weight and activation function
- --></p>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
